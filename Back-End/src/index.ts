@@ -2,6 +2,7 @@ import express,{ Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import indexRoutes from "./routes/indexRoutes";
+import authRoutes from "./routes/authRoutes";
 
 class Server{
 
@@ -45,6 +46,7 @@ class Server{
      ***************************************************/
     private routes():void{
         this.app.use("/",indexRoutes);
+        this.app.use("/api/auth",authRoutes);
     }
 
     /***************************************************
