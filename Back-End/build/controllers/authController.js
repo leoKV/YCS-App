@@ -19,8 +19,15 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authController = void 0;
+const authDatabase_1 = __importDefault(require("../database/authDatabase"));
+const utils_1 = require("../utils/utils");
+//npm i jsonwebtoken
+//npm i @types/jsonwebtoken -D
 /**
  * @name AuthController
  * @author Kevin Leonel
@@ -29,12 +36,38 @@ exports.authController = void 0;
 class AuthController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const _a = req.body, { email, password } = _a, rest = __rest(_a, ["email", "password"]);
-            const auth = {
-                email,
-                password
-            };
-            res.json({ auth });
+            try {
+                const { email, contrasenia } = req.body;
+                /* const auth={
+                     email,
+                     password
+                 }
+                 */
+                // Obtener la información de los usuarios a partir de su "email"
+                const users = yield authDatabase_1.default.getUserByEmail(email);
+                //TO DO: Realizar un ciclo "for" para obtener la información
+                for (let user of users) {
+                    //Validar la contraseña
+                    if (user.contrasenia == contrasenia) {
+                        //Obtener los roles del usuario
+                        const roles = yield authDatabase_1.default.getUserByCveUsuario(user.cveUsuario);
+                        user.roles = roles;
+                        //TO DO: Dentro del ciclo: Crear un modelo con la información
+                        const { contrasenia, fecha_Registro } = user, newUser = __rest(user, ["contrasenia", "fecha_Registro"]);
+                        // Generar un JWT (JsonWebToken)
+                        var token = utils_1.utils.generateJWT(newUser);
+                        //Devolver la información
+                        return res.json({ token, mensaje: "Autentificación correcta" });
+                    }
+                    else {
+                        return res.status(404).json({ mensaje: "El usuario y/o contraseña es incorrecto" });
+                    }
+                }
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
         });
     }
 }

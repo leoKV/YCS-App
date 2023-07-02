@@ -7,7 +7,7 @@ export const loginValidatorRules = () =>{
         body("email").trim().not().isEmpty().withMessage("Campo requerido")
         .isLength({min:10,max:50}).withMessage("Rango Incorrecto"),
         body("email").isEmail().withMessage("Formato de email incorrecto"),
-        body("password").trim().not().isEmpty().withMessage("Campo requerido")
+        body("contrasenia").trim().not().isEmpty().withMessage("Campo requerido")
         .isLength({min:8,max:15}).withMessage("Rango Incorrecto")
     ]
 }
