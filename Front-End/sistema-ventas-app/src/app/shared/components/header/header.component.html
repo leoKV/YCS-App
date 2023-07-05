@@ -6,8 +6,13 @@
     </ng-container>
     <span> <a routerLink="/home">Your Clothing Shop</a> </span>
     <span class="spacer"></span>
+    <form class="d-flex" role="search" style="padding-right: 2%;">
+        <input class="form-control me-2" type="search" placeholder="Buscar Prenda" aria-label="Search">
+        <button class="btn btn-success" type="submit">Buscar</button>
+      </form>
     <div>
         <button mat-button (click)="isLogged= !isLogged">Test</button>
         <a mat-button routerLink="/login">Iniciar Sesión</a>
+        <a mat-button routerLink="/register">Registrarse</a>
     </div>
 </mat-toolbar>

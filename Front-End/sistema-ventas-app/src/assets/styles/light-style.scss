@@ -1,7 +1,7 @@
 @import '@angular/material/theming'; 
 
-@include mit-core();
-//TO DO: GAMA DE COLORES
+@include mat-core();
+//GAMA DE COLORES
 /* For use in src/lib/core/theming/_palette.scss */
 $my-primary-color: (
     50 : #f9ecfb,
@@ -104,5 +104,17 @@ $my-warn-color: (
     )
 );
 //TO DO: AGREGAR LA PALETA DE COLORES
-//TO DO: CREAR EL TEMA
-//TO DO: APLICAR EL TEMA A NUESTRA APLICACIÓN ANGULAR
+$my-palette-primary: mat-palette($my-primary-color);
+$my-palette-accent: mat-palette($my-accent-color);
+$my-palette-warn: mat-palette($my-warn-color);
+
+//CREAR EL TEMA
+$light-theme: mat-light-theme((
+    color:(
+        primary: $my-palette-primary,
+        accent: $my-palette-accent,
+        warn: $my-palette-warn
+    )
+));
+//APLICAR EL TEMA A NUESTRA APLICACIÓN ANGULAR
+@include angular-material-theme($light-theme)

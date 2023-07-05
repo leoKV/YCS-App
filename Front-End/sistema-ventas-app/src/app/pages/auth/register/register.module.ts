@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
-import { MaterialModule } from '../../../material.module';
-import {MatCardModule} from '@angular/material/card';
+import { RegisterRoutingModule } from './register-routing.module';
+import { RegisterComponent } from './register.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input'; // Agrega esta importación
 import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule,
-    MaterialModule,
+    RegisterRoutingModule,
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -26,4 +24,4 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule
   ]
 })
-export class LoginModule { }
+export class RegisterModule { }
