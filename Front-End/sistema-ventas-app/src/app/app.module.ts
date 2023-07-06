@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SidebarModule } from './shared/components/sidebar/sidebar.module';
     BrowserAnimationsModule,
     MaterialModule,
     SidebarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
