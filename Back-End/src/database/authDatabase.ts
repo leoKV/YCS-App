@@ -16,7 +16,7 @@ class AuthDatabase{
     public async getUserByEmail(email:string){
         const result = await pool.then(async (connection) =>{
             return await connection.query(
-                "SELECT * FROM tblUsuario WHERE email = ?",
+                " SELECT * FROM tblUsuario WHERE email = ? ",
                 [email]
             );
         });
@@ -33,10 +33,10 @@ class AuthDatabase{
      public async getUserByCveUsuario(clave:string){
         const result = await pool.then(async (connection) =>{
             return await connection.query(
-                "SELECT r.idRol, r.nombre, r.clave"
-                +"FROM tblUsuarioRol ru"
-                +"JOIN tblRol r ON r.idRol = ru.idRol"
-                +"WHERE ru.idUsuario = ? AND r.estatus=?",
+                " SELECT r.idRol, r.nombre, r.clave "
+                +" FROM tblUsuarioRol ru "
+                +" JOIN tblRol r ON r.idRol = ru.idRol "
+                +" WHERE ru.idUsuario = ? AND r.estatus=? ",
                 [clave, true]
             );
         });

@@ -28,7 +28,7 @@ class AuthDatabase {
     getUserByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query("SELECT * FROM tblUsuario WHERE email = ?", [email]);
+                return yield connection.query(" SELECT * FROM tblUsuario WHERE email = ? ", [email]);
             }));
             return result;
         });
@@ -42,10 +42,10 @@ class AuthDatabase {
     getUserByCveUsuario(clave) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query("SELECT r.idRol, r.nombre, r.clave"
-                    + "FROM tblUsuarioRol ru"
-                    + "JOIN tblRol r ON r.idRol = ru.idRol"
-                    + "WHERE ru.idUsuario = ? AND r.estatus=?", [clave, true]);
+                return yield connection.query(" SELECT r.idRol, r.nombre, r.clave "
+                    + " FROM tblUsuarioRol ru "
+                    + " JOIN tblRol r ON r.idRol = ru.idRol "
+                    + " WHERE ru.idUsuario = ? AND r.estatus=? ", [clave, true]);
             }));
         });
     }
