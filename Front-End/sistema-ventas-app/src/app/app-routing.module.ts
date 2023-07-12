@@ -32,7 +32,8 @@ const routes: Routes = [
     canActivate:[CheckLoginGuard]
   },
   { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule) },
-  { path: 'payment/envio', loadChildren: () => import('./pages/payment/envio/envio.module').then(m => m.EnvioModule) }
+  { path: 'payment/envio', loadChildren: () => import('./pages/payment/envio/envio.module').then(m => m.EnvioModule) },
+  { path: 'payment/pay', loadChildren: () => import('./pages/payment/pay/pay.module').then(m => m.PayModule) }
 ];
 
 @NgModule({
