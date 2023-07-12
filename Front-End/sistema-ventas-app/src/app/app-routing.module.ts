@@ -30,7 +30,12 @@ const routes: Routes = [
     path: 'register', 
     loadChildren: () => import('./pages/auth/register/register.module').then(m => m.RegisterModule),
     canActivate:[CheckLoginGuard]
-  }
+  },
+  { path: 'categorias/register', loadChildren: () => import('./pages/admin/cateregister/cateregister.module').then(m => m.CateregisterModule) },
+  { path: 'categorias/general', loadChildren: () => import('./pages/admin/categeneral/categeneral.module').then(m => m.CategeneralModule) },
+  { path: 'articulos/register', loadChildren: () => import('./pages/admin/artiregister/artiregister.module').then(m => m.ArtiregisterModule) },
+  { path: 'articulos/detail', loadChildren: () => import('./pages/admin/artidetails/artidetails.module').then(m => m.ArtidetailsModule) },
+  { path: 'articulos/general', loadChildren: () => import('./pages/admin/artigeneral/artigeneral.module').then(m => m.ArtigeneralModule) }
 ];
 
 @NgModule({
