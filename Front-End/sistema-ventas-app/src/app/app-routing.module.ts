@@ -30,7 +30,8 @@ const routes: Routes = [
     path: 'register', 
     loadChildren: () => import('./pages/auth/register/register.module').then(m => m.RegisterModule),
     canActivate:[CheckLoginGuard]
-  }
+  },
+  { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule) }
 ];
 
 @NgModule({
