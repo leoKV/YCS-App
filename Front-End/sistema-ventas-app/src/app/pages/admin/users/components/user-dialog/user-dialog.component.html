@@ -1,0 +1,101 @@
+
+    <h1 mat-dialog-title>{{ data?.title}}</h1>
+<br>
+<mat-dialog-content>
+    <form [formGroup]="userForm" (submit)="onSave()">
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="nombre" matInput>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('nombre'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Apellido Paterno</mat-label>
+            <input type="text" formControlName="apellidoPaterno" matInput>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('apellidoPaterno'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Apellido Materno</mat-label>
+            <input type="text" formControlName="apellidoMaterno" matInput>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('apellidoMaterno'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" formControlName="email" matInput>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('email'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input type="text" formControlName="telefono" matInput>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('telefono'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="actionTODO =='new'" class="full-width mb-3" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input [type]="hidePwd ? 'password' :'text'" formControlName="contrasenia" matInput>
+            <button type="button" mat-icon-button matSuffix (click)="hidePwd = !hidePwd">
+                <mat-icon>{{ hidePwd ? 'visibility_off':'visibility'}}</mat-icon>
+            </button>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('contrasenia'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="actionTODO =='new'" class="full-width mb-3" appearance="outline">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input [type]="hideConfirmPwd ? 'password' :'text'" formControlName="confirmContrasenia" matInput>
+            <button type="button" mat-icon-button matSuffix (click)="hidePwd = !hidePwd">
+                <mat-icon>{{ hideConfirmPwd ? 'visibility_off':'visibility'}}</mat-icon>
+            </button>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('confirmContrasenia'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width mb-3" appearance="outline">
+            <mat-label>Rol(es)</mat-label>
+            <mat-select formControlName="roles" multiple>
+                <mat-option *ngFor="let rol of roles" [value]="rol">
+                    {{rol.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                {{baseForm.getErrorMessage(userForm.get('roles'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button class="me-2" type="submit" mat-raised-button color="primary">
+                <mat-icon>save</mat-icon>
+                Guardar
+            </button>
+
+            <button mat-raised-button color="warn" (click)="onClear()">
+                <mat-icon>clear</mat-icon>
+                Limpiar
+            </button>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        Cerrar
+    </button>
+</mat-dialog-actions>
+

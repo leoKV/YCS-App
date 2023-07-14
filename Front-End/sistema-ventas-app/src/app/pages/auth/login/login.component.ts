@@ -27,6 +27,5 @@ export class LoginComponent implements OnInit {
     this.authSvc.login(form).subscribe( (data:AuthResponse | void)=>{ 
      
     });
-    console.log("OnLogin Method", form);
   }
 }

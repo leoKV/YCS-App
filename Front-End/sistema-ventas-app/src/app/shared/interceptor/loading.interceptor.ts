@@ -19,8 +19,8 @@ export class LoadingInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(finalize(()=>{
       this.countRequest --;
-      if(this.countRequest){
-        //this.spinner.hide();
+      if(!this.countRequest){
+        this.spinner.hide();
       }
     }));
   }

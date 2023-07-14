@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   get tokenValue(){
-    return this.token.asObservable();
+    return this.token.value;
   }
             
   get tokenData$():Observable<any>{

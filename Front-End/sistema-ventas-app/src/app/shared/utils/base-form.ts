@@ -25,7 +25,8 @@ export class BaseForm{
                     pattern:'Formato inválido',
                     min:'El rango no es correcto',
                     max:'El rango no es correcto',
-                    minlength:'Formato inválido'
+                    minlength:'Formato inválido',
+                    notEquivalentContrasenia:'Las contraseñas no coinciden'
                 }
 
                 const errorKey = Object.keys(errors).find(Boolean);

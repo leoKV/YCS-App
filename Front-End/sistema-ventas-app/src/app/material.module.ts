@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule } from '@angular/material/input'; // Agrega esta importación
 import{MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const myModules: any =[
     MatButtonModule,
@@ -20,7 +21,8 @@ const myModules: any =[
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
 ];
 
  @NgModule({
