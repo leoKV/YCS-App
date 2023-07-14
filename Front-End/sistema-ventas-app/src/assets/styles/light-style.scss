@@ -1,0 +1,120 @@
+@import '@angular/material/theming'; 
+
+@include mat-core();
+//GAMA DE COLORES
+/* For use in src/lib/core/theming/_palette.scss */
+$my-primary-color: (
+    50 : #f9ecfb,
+    100 : #f0cef6,
+    200 : #e6aef0,
+    300 : #db8eea,
+    400 : #d475e6,
+    500 : #cc5de1,
+    600 : #c755dd,
+    700 : #c04bd9,
+    800 : #b941d5,
+    900 : #ad30cd,
+    A100 : #ffffff,
+    A200 : #f8deff,
+    A400 : #edabff,
+    A700 : #e891ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$my-accent-color: (
+    50 : #fcf1fe,
+    100 : #f7dcfc,
+    200 : #f2c5fa,
+    300 : #edaef8,
+    400 : #e99cf7,
+    500 : #e58bf5,
+    600 : #e283f4,
+    700 : #de78f2,
+    800 : #da6ef0,
+    900 : #d35bee,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fceeff,
+    A700 : #f7d4ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$my-warn-color: (
+    50 : #f9e0e0,
+    100 : #f0b3b3,
+    200 : #e68080,
+    300 : #db4d4d,
+    400 : #d42626,
+    500 : #cc0000,
+    600 : #c70000,
+    700 : #c00000,
+    800 : #b90000,
+    900 : #ad0000,
+    A100 : #ffd7d7,
+    A200 : #ffa4a4,
+    A400 : #ff7171,
+    A700 : #ff5858,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+//TO DO: AGREGAR LA PALETA DE COLORES
+$my-palette-primary: mat-palette($my-primary-color);
+$my-palette-accent: mat-palette($my-accent-color);
+$my-palette-warn: mat-palette($my-warn-color);
+
+//CREAR EL TEMA
+$light-theme: mat-light-theme((
+    color:(
+        primary: $my-palette-primary,
+        accent: $my-palette-accent,
+        warn: $my-palette-warn
+    )
+));
+//APLICAR EL TEMA A NUESTRA APLICACIÓN ANGULAR
+@include angular-material-theme($light-theme)
