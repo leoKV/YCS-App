@@ -13,6 +13,7 @@ class AuthController{
     
         try{
             const {email, contrasenia} = req.body;
+
             /* const auth={
                  email,
                  password
@@ -23,7 +24,7 @@ class AuthController{
              //TO DO: Realizar un ciclo "for" para obtener la información
              for(let user of users){
                 //Validar la contraseña
-                if(user.contrasenia == contrasenia){
+                if(await utils.checkContrasenia(contrasenia,user.contrasenia)){
                 //Obtener los roles del usuario
                 const roles = await dao.getUserByCveUsuario(user.cveUsuario);
                 user.roles = roles;
@@ -35,7 +36,7 @@ class AuthController{
                 return res.json({token, mensaje:"Autentificación correcta"});
                 }
                 else{
-                    return res.status(404).json({mensaje: "El usuario y/o contraseña es incorrecto"});
+                    return res.status(404).json({mensaje: "El email y/o contraseña es incorrecto"});
                 }
              }
 

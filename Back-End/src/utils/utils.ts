@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import keys from '../config/keys'
+import bcrypt from 'bcryptjs';
 /**
  * @name Utils
  * @author Kevin Leonel Valdez Sánchez
@@ -19,14 +20,40 @@ class Utils{
 
 
     /**
-     * @name verifyJWT
+     * @name getPayload
      * @description TO DO
      * @param token
      * @return any
      */
-    public verifyJWT(token: any): any{
-        var jwtPayload = jwt.verify(token, keys.secret.jwt);
-        return jwtPayload;
+    public getPayload(token: string): any{
+        var jwtPayload =<any>jwt.verify(token, keys.secret.jwt);
+
+        const {iat,exp,...data} = jwtPayload;
+        return data;
     }
+
+    /**
+     * @name hashContrasenia
+     * @description TO DO
+     * @param password
+     * @return Promise<any>
+     */
+    public async hashContrasenia(contrasenia: string){
+        const salt = await bcrypt.genSaltSync(10);
+        return await bcrypt.hashSync(contrasenia, salt);
+    }
+
+    /**
+     * @name checkContrasenia
+     * @description TO DO
+     * @param password
+     * @param encryptedContrasenia
+     * @return Promise<any>
+     */
+    public async checkContrasenia(contrasenia: string, encryptedContrasenia: string){
+        return await bcrypt.compareSync(contrasenia,encryptedContrasenia);
+
+    }
+
 }
 export const utils = new Utils()
