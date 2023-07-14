@@ -1,0 +1,13 @@
+.cuerpo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    background-image: url("/src/assets/images/LogoMCS.png");
+    background-size: cover;
+  }
+  
+.centered-container {
+    text-align: left;
+    width: 50%;
+}

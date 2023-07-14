@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ArtiregisterRoutingModule } from './artiregister-routing.module';
 import { ArtiregisterComponent } from './artiregister.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input'; // Agrega esta importación
+import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -11,7 +15,12 @@ import { ArtiregisterComponent } from './artiregister.component';
   ],
   imports: [
     CommonModule,
-    ArtiregisterRoutingModule
+    ArtiregisterRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class ArtiregisterModule { }
