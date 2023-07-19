@@ -6,7 +6,7 @@ class UsuarioDatabase{
     public async listar(idUsuario: number){
         const result =await pool.then(async (connection)=>{
             return await connection.query(
-                " SELECT idUsuario, nombre, apellidoPaterno,apellidoMaterno,email,fecha_Registro "
+                " SELECT idUsuario, nombre, apellidoPaterno,apellidoMaterno,email,telefono,fecha_Registro "
                 +" FROM tblUsuario WHERE idUsuario !=? ",
                 [idUsuario]
             );
