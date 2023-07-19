@@ -35,7 +35,7 @@ export class UsuarioService {
   }
             
   delete(idUsuario:number):Observable<any>{
-    return this.http.delete<any>(`${environment.API_URL}/usuario/,${idUsuario}`,{headers:{"requireToken":"true"}})
+    return this.http.delete<any>(`${environment.API_URL}/usuario/${idUsuario}`,{headers:{"requireToken":"true"}})
     .pipe(catchError((error)=>this.handlerError(error)));
   }
 

@@ -1,53 +1,79 @@
 <mat-card class="small-card">
-    <div class="cuerpo">
-      <div class="imglogo">
-        <img src="assets\images\LogoMCS.png" alt="" style="height: 300px;">
-      </div>
-        <div class="centered-container">
-          <mat-card class="card">
-            <mat-card-content>
-                <h1>Registro</h1>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="width: 100%;">
-                  <input matInput type="text">
-                  <mat-label>Nombre</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 49%; ">
-                  <input matInput type="text">
-                  <mat-label>Apellido Paterno</mat-label>
-                </mat-form-field>
-                <mat-form-field class="inputs" style="width: 49%;">
-                    <input matInput type="text">
-                    <mat-label>Apellido Materno</mat-label>
-                  </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 49%; ">
-                  <input matInput type="email">
-                  <mat-label>Correo</mat-label>
-                </mat-form-field>
-                <mat-form-field class="inputs" style="width: 49%;">
-                    <input matInput type="tel">
-                    <mat-label>Numero de Telefono</mat-label>
-                  </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 49%; ">
-                  <input matInput type="password">
-                  <mat-label>Contraseña</mat-label>
-                </mat-form-field>
-                <mat-form-field class="inputs" style="width: 49%;">
-                    <input matInput type="password">
-                    <mat-label>Confirmar Contraseña</mat-label>
-                  </mat-form-field>
-              </div>
+  <div class="cuerpo">
+    <div class="imglogo">
+      <img src="assets\images\LogoMCS.png" alt style="height: 300px;">
+    </div>
+    <div class="centered-container">
+      <!-- <mat-card class="card"> -->
+      <h1>Registro</h1>
+      <mat-card-content>
+        <form [formGroup]="clientForm" (ngSubmit)="onSave()">
+          <div class="form-field">
+            <mat-form-field class="inputs" style="width: 100%;">
+              <input matInput type="text" formControlName="nombre">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('nombre'))}}
+              </mat-error>
+              <mat-label>Nombre</mat-label>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field class="inputs"
+              style="margin-right: 10px; width: 49%; ">
+              <input matInput type="text" formControlName="apellidoPaterno">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('apellidoPaterno'))}}
+              </mat-error>
+              <mat-label>Apellido Paterno</mat-label>
+            </mat-form-field>
+            <mat-form-field class="inputs" style="width: 49%;">
+              <input matInput type="text" formControlName="apellidoMaterno">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('apellidoMaterno'))}}
+              </mat-error>
+              <mat-label>Apellido Materno</mat-label>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field class="inputs"
+              style="margin-right: 10px; width: 49%; ">
+              <input matInput type="email" formControlName="email">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('email'))}}
+              </mat-error>
+              <mat-label>Correo</mat-label>
+            </mat-form-field>
+            <mat-form-field class="inputs" style="width: 49%;">
+              <input matInput type="tel" formControlName="telefono">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('telefono'))}}
+              </mat-error>
+              <mat-label>Numero de Telefono</mat-label>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field class="inputs"
+              style="margin-right: 10px; width: 49%; ">
+              <input matInput type="password" formControlName="contrasenia">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('contrasenia'))}}
+              </mat-error>
+              <mat-label>Contraseña</mat-label>
+            </mat-form-field>
+            <mat-form-field class="inputs" style="width: 49%;">
+              <input matInput type="password"
+                formControlName="confirmContrasenia">
+              <mat-error>
+                {{baseForm.getErrorMessage(clientForm.get('confirmContrasenia'))}}
+              </mat-error>
+              <mat-label>Confirmar Contraseña</mat-label>
+            </mat-form-field>
+          </div>
 
-
-              <button mat-button color="primary">Registrarse</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+          <button mat-button color="primary">Registrarse</button>
+        </form>
+      </mat-card-content>
+      <!-- </mat-card> -->
+    </div>
+  </div>
 </mat-card>
