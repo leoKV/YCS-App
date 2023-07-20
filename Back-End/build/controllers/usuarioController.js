@@ -27,9 +27,9 @@ exports.usuarioController = void 0;
 const usuarioDatabase_1 = __importDefault(require("../database/usuarioDatabase"));
 const utils_1 = require("../utils/utils");
 /**
- * @name
- * @author
- * @creation
+ * @name usuarioController
+ * @author Kevin Leonel Valdez Sánchez
+ * @creation 10-07-2023
  */
 class UsuarioController {
     listar(req, res) {

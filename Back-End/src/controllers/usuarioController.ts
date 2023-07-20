@@ -3,9 +3,9 @@ import dao from "../database/usuarioDatabase";
 import { utils } from "../utils/utils";
 
 /**
- * @name
- * @author
- * @creation
+ * @name usuarioController
+ * @author Kevin Leonel Valdez Sánchez
+ * @creation 10-07-2023
  */
 class UsuarioController{
     public async listar(req:Request, res:Response){
