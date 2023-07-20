@@ -48,5 +48,5 @@ class ProductoDatabase {
         });
     }
 }
-const dao = new ProductoDatabase();
-exports.default = dao;
+const daoP = new ProductoDatabase();
+exports.default = daoP;

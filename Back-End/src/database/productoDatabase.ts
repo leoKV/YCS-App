@@ -38,5 +38,5 @@ class ProductoDatabase{
 
 }
 
-const dao = new ProductoDatabase();
-export default dao;
+const daoP = new ProductoDatabase();
+export default daoP;

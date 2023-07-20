@@ -8,8 +8,7 @@ const insertValidationRules = () => {
             .isLength({ min: 3, max: 150 }).withMessage("Rango Incorrecto"),
         (0, express_validator_1.body)("descripcion").trim().not().isEmpty().withMessage("Campo requerido")
             .isLength({ min: 10, max: 500 }).withMessage("Rango Incorrecto"),
-        (0, express_validator_1.body)("idCategoria").trim().not().isEmpty().withMessage("Campo requerido"),
-        (0, express_validator_1.body)("idRegistro").trim().not().isEmpty().withMessage("Campo requerido")
+        (0, express_validator_1.body)("idCategoria").trim().not().isEmpty().withMessage("Campo requerido")
     ];
 };
 exports.insertValidationRules = insertValidationRules;
@@ -19,8 +18,7 @@ const updateValidationRules = () => {
             .isLength({ min: 3, max: 150 }).withMessage("Rango Incorrecto"),
         (0, express_validator_1.body)("descripcion").trim().not().isEmpty().withMessage("Campo requerido")
             .isLength({ min: 20, max: 500 }).withMessage("Rango Incorrecto"),
-        (0, express_validator_1.body)("idCategoria").trim().not().isEmpty().withMessage("Campo requerido"),
-        (0, express_validator_1.body)("idRegistro").trim().not().isEmpty().withMessage("Campo requerido")
+        (0, express_validator_1.body)("idCategoria").trim().not().isEmpty().withMessage("Campo requerido")
     ];
 };
 exports.updateValidationRules = updateValidationRules;

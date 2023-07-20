@@ -8,22 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productoController = void 0;
+const utils_1 = require("../utils/utils");
 const productoDatabase_1 = __importDefault(require("../database/productoDatabase"));
 class ProductoController {
     //Listar productos
@@ -45,8 +35,17 @@ class ProductoController {
     insertar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                var producto = __rest(req.body, []);
-                const result = yield productoDatabase_1.default.insertar(producto);
+                const token = req.headers["auth"];
+                const data = utils_1.utils.getPayload(token);
+                //var {...producto} = req.body
+                var producto = req.body;
+                var newProducto = {
+                    nombre: producto.nombre,
+                    descripcion: producto.descripcion,
+                    idCategoria: producto.idCategoria,
+                    idRegistro: data.idUsuario
+                };
+                const result = yield productoDatabase_1.default.insertar(newProducto);
                 if (result.affectedRows > 0) {
                     return res.json({ mensaje: "Producto registrado correctamente" });
                 }
@@ -64,8 +63,17 @@ class ProductoController {
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                var _a = req.body, { idProducto } = _a, producto = __rest(_a, ["idProducto"]);
-                const result = yield productoDatabase_1.default.actualizar(producto, idProducto);
+                const token = req.headers["auth"];
+                const data = utils_1.utils.getPayload(token);
+                var producto = req.body;
+                var updateProducto = {
+                    nombre: producto.nombre,
+                    descripcion: producto.descripcion,
+                    idCategoria: producto.idCategoria,
+                    idRegistro: data.idUsuario
+                };
+                //var {idProducto,...producto} = req.body;
+                const result = yield productoDatabase_1.default.actualizar(updateProducto, producto.idProducto);
                 if (result.affectedRows > 0) {
                     return res.json({ mensaje: "Producto actualizado correctamente" });
                 }
