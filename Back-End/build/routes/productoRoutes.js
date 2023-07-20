@@ -11,14 +11,22 @@ class ProductoRoutes {
         this.config();
     }
     config() {
-        //Listar
+        //Listar producto
         this.router.get("/", [jwtCheck_1.jwtCheck], productoController_1.productoController.listar);
-        //Insertar
+        //Listar detalle del producto por el id
+        this.router.get("/detalle", [jwtCheck_1.jwtCheck], productoController_1.productoController.listarDetalleByProductId);
+        //Insertar producto
         this.router.post("/", (0, ProductoValidatorRules_1.insertValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.insertar);
-        //Actualizar
+        //Insertar detalle del producto
+        this.router.post("/detalle", (0, ProductoValidatorRules_1.insertDetailValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.insertarDetalleProducto);
+        //Actualizar producto
         this.router.put("/", (0, ProductoValidatorRules_1.updateValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.actualizar);
-        //Eliminar
+        //Actualizar detalle del producto
+        this.router.put("/detalle", (0, ProductoValidatorRules_1.updateDetailValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.actualizarDetalleProducto);
+        //Eliminar producto
         this.router.delete("/:idProducto", productoController_1.productoController.eliminar);
+        //Eliminar detalle del producto
+        this.router.delete("/detalle/:idDetalleProducto", productoController_1.productoController.eliminarDetalleProducto);
     }
 }
 const producto = new ProductoRoutes();

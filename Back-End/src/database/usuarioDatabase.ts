@@ -14,18 +14,7 @@ class UsuarioDatabase{
 
         return result;
     }
-
-    public async obtenerUsuario(idUsuario: number){
-        const result =await pool.then(async (connection)=>{
-            return await connection.query(
-                " SELECT idUsuario"
-                +" FROM tblUsuario WHERE idUsuario =? ",
-                [idUsuario]
-            );
-        });
-        return result;
-    }
-
+    
     public async listarRolByUserId(idUsuario: number){
         const result =await pool.then(async (connection)=>{
             return await connection.query(

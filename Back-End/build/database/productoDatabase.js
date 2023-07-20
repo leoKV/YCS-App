@@ -14,11 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../connections/database"));
 class ProductoDatabase {
-    listar( /*idProducto: number*/) {
+    listar() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 // return await connection.query(" SELECT * FROM tblProducto WHERE idProducto = ? ",[idProducto] );
                 return yield connection.query(" SELECT * FROM tblProducto ");
+            }));
+            return result;
+        });
+    }
+    listarDetalleByProductId(idProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" SELECT * FROM tblDetalleProducto WHERE idProducto =? ", [idProducto]);
             }));
             return result;
         });
@@ -31,6 +39,14 @@ class ProductoDatabase {
             return result;
         });
     }
+    insertarDetalleProducto(detalleProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" INSERT INTO tblDetalleProducto SET ? ", [detalleProducto]);
+            }));
+            return result;
+        });
+    }
     actualizar(producto, idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -39,10 +55,34 @@ class ProductoDatabase {
             return result;
         });
     }
+    actualizarDetalleProducto(detalleProducto, idDetalleProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" UPDATE tblDetalleProducto SET ? WHERE idDetalleProducto = ? ", [detalleProducto, idDetalleProducto]);
+            }));
+            return result;
+        });
+    }
     eliminar(idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 return yield connection.query(" DELETE FROM tblProducto WHERE idProducto = ? ", [idProducto]);
+            }));
+            return result;
+        });
+    }
+    eliminarDetalleProducto(idDetalleProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" DELETE FROM tblDetalleProducto WHERE idDetalleProducto = ? ", [idDetalleProducto]);
+            }));
+            return result;
+        });
+    }
+    eliminarDetalleByProductId(idProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" DELETE FROM tblDetalleProducto WHERE idProducto =? ", [idProducto]);
             }));
             return result;
         });
