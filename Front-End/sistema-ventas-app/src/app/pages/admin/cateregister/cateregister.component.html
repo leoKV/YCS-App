@@ -1,27 +1,26 @@
 <mat-card class="small-card">
-    <div class="cuerpo">
-      <div class="imglogo">
-        <img src="assets\images\LogoMCS.png" alt="" style="height: 300px;">
-      </div>
-        <div class="centered-container">
-          <mat-card class="card">
-            <mat-card-content>
-                <h1>Registro de Nueva Categoria</h1>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="width: 100%;">
-                  <input matInput type="text">
-                  <mat-label>Nombre</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="text">
-                  <mat-label>Descripción</mat-label>
-                </mat-form-field>
-              </div>
-              <button mat-button color="primary">Registrar Nueva Categoria</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+  <div class="cuerpo">
+    <div class="imglogo">
+      <img src="assets\images\LogoMCS.png" alt="" style="height: 300px;">
+    </div>
+    <div class="centered-container">
+      <mat-card class="card">
+        <mat-card-content>
+          <h1>Registro de Nueva Categoria</h1>
+          <form [formGroup]="nuevaCategoriaForm">
+            <!-- Usamos formControlName para asociar los controles del formulario -->
+            <mat-form-field class="inputs" style="width: 100%;">
+              <input matInput type="text" formControlName="nombre">
+              <mat-label>Nombre</mat-label>
+            </mat-form-field>
+            <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
+              <input matInput type="text" formControlName="descripcion">
+              <mat-label>Descripción</mat-label>
+            </mat-form-field>
+          </form>
+          <button mat-button color="primary" (click)="registrarCategoria()">Registrar Nueva Categoria</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </mat-card>

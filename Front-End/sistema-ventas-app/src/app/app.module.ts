@@ -13,12 +13,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from '../app/shared/interceptor/loading.interceptor';
 import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +26,7 @@ import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
     MaterialModule,
     SidebarModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:LoadingInterceptor,multi:true},

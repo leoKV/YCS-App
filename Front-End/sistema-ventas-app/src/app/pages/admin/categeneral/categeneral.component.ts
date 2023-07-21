@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-categeneral',
   templateUrl: './categeneral.component.html',
