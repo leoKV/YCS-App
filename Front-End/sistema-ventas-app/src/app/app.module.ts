@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from '../app/shared/interceptor/loading.interceptor';
 import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
     MaterialModule,
     SidebarModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:LoadingInterceptor,multi:true},
