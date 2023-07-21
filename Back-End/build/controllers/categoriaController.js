@@ -28,7 +28,6 @@ class CategoriaController {
             }
         });
     }
-    //Insertar productos
     insertar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -57,7 +56,7 @@ class CategoriaController {
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { idCategoria } = req.params; // idCategoria debe ser un string
+                const { idCategoria } = req.params;
                 const { nombre, descripcion } = req.body;
                 const result = yield categoriaDatabase_1.default.actualizar(idCategoria, nombre, descripcion);
                 if (result.affectedRows > 0) {

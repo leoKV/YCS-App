@@ -13,7 +13,6 @@ class CategoriaController {
       res.status(500).json({ mensaje: "Ocurrió un error" });
     }
   }
-  //Insertar productos
   public async insertar(req: Request, res: Response) {
     try {
       const token = <string>req.headers["auth"];
@@ -40,7 +39,7 @@ class CategoriaController {
   }
   public async actualizar(req: Request, res: Response) {
     try {
-      const { idCategoria } = req.params; // idCategoria debe ser un string
+      const { idCategoria } = req.params; 
       const { nombre, descripcion } = req.body;
 
       const result = await daoC.actualizar(idCategoria, nombre, descripcion);
