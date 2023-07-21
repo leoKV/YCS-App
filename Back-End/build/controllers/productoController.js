@@ -40,12 +40,27 @@ class ProductoController {
             }
         });
     }
+    //Método para listar del detalle de un producto en base a su id de producto
     listarDetalleByProductId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 var idProducto = req.body.idProducto;
                 var detalleProducto = yield productoDatabase_1.default.listarDetalleByProductId(idProducto);
                 return res.json(detalleProducto);
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
+    //Método para listar las imagenes en base a su id de detalle del producto
+    listarImagenByProductDetailId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var idDetalleProducto = req.body.idDetalleProducto;
+                var imagenProducto = yield productoDatabase_1.default.listarImagenByProductDetailId(idDetalleProducto);
+                return res.json(imagenProducto);
             }
             catch (error) {
                 console.error(error);
@@ -99,6 +114,25 @@ class ProductoController {
             }
         });
     }
+    //Método para insetar la imagenes del producto
+    insertarImagenProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var imagenProducto = __rest(req.body, []);
+                const result = yield productoDatabase_1.default.insertarImagenProducto(imagenProducto);
+                if (result.affectedRows > 0) {
+                    return res.json({ mensaje: "Imagen del producto agregada correctamente" });
+                }
+                else {
+                    return res.status(505).json({ mensaje: "Ocurrió un error" });
+                }
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
     //Método para actualizar productos de la tabla tblProducto
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -134,6 +168,25 @@ class ProductoController {
                 const result = yield productoDatabase_1.default.actualizarDetalleProducto(detalleProducto, idDetalleProducto);
                 if (result.affectedRows > 0) {
                     return res.json({ mensaje: "Detalle del producto actualizado correctamente" });
+                }
+                else {
+                    return res.status(500).json({ mensaje: "ocurrió un error" });
+                }
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
+    //Método para actualizar la imagen del producto
+    actualizarImagenProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var _a = req.body, { idImagen } = _a, imagenProducto = __rest(_a, ["idImagen"]);
+                const result = yield productoDatabase_1.default.actualizarImagenProducto(imagenProducto, idImagen);
+                if (result.affectedRows > 0) {
+                    return res.json({ mensaje: "Imagen del producto actualizada correctamente" });
                 }
                 else {
                     return res.status(500).json({ mensaje: "ocurrió un error" });
@@ -192,6 +245,25 @@ class ProductoController {
                 const result = yield productoDatabase_1.default.eliminarDetalleByProductId(idProducto);
                 if (result.affectedRows > 0) {
                     return res.json({ mensaje: 'Detalle(s) del producto eliminado(s) correctamente' });
+                }
+                else {
+                    return res.status(500).json({ mensaje: 'Ocurrió un error' });
+                }
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
+    //Método para eliminar imagen de un producto
+    eliminarImagenProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var idImagen = parseInt(req.params.idImagen);
+                const result = yield productoDatabase_1.default.eliminarImagenProducto(idImagen);
+                if (result.affectedRows > 0) {
+                    return res.json({ mensaje: 'Imagen del producto eliminada correctamente' });
                 }
                 else {
                     return res.status(500).json({ mensaje: 'Ocurrió un error' });

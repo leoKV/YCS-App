@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateDetailValidationRules = exports.insertDetailValidationRules = exports.updateValidationRules = exports.insertValidationRules = void 0;
+exports.updateImageValidationRules = exports.insertImageValidationRules = exports.updateDetailValidationRules = exports.insertDetailValidationRules = exports.updateValidationRules = exports.insertValidationRules = void 0;
 const express_validator_1 = require("express-validator");
 //Reglas para insertar un producto
 const insertValidationRules = () => {
@@ -52,3 +52,22 @@ const updateDetailValidationRules = () => {
     ];
 };
 exports.updateDetailValidationRules = updateDetailValidationRules;
+//Reglas para insertar una imagen del producto
+const insertImageValidationRules = () => {
+    return [
+        (0, express_validator_1.body)("rutaImagen").trim().not().isEmpty().withMessage("Campo requerido")
+            .isLength({ min: 5 }).withMessage("Rango Incorrecto"),
+        (0, express_validator_1.body)("idDetalleProducto").trim().not().isEmpty().withMessage("Campo requerido")
+    ];
+};
+exports.insertImageValidationRules = insertImageValidationRules;
+//Reglas para actualizar una imagen del producto
+const updateImageValidationRules = () => {
+    return [
+        (0, express_validator_1.body)("idImagen").trim().not().isEmpty().withMessage("Campo requerido"),
+        (0, express_validator_1.body)("rutaImagen").trim().not().isEmpty().withMessage("Campo requerido")
+            .isLength({ min: 5 }).withMessage("Rango Incorrecto"),
+        (0, express_validator_1.body)("idDetalleProducto").trim().not().isEmpty().withMessage("Campo requerido")
+    ];
+};
+exports.updateImageValidationRules = updateImageValidationRules;

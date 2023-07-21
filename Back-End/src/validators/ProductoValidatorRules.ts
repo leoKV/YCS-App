@@ -48,3 +48,23 @@ export const updateDetailValidationRules=() =>{
     .isNumeric().withMessage("Solo se admite un valor númerico") 
   ]
 }
+
+
+//Reglas para insertar una imagen del producto
+export const insertImageValidationRules=() =>{
+  return[
+      body("rutaImagen").trim().not().isEmpty().withMessage("Campo requerido")
+      .isLength({min:5}).withMessage("Rango Incorrecto"),
+      body("idDetalleProducto").trim().not().isEmpty().withMessage("Campo requerido")  
+  ]
+}
+
+//Reglas para actualizar una imagen del producto
+export const updateImageValidationRules=() =>{
+  return[
+      body("idImagen").trim().not().isEmpty().withMessage("Campo requerido"),
+      body("rutaImagen").trim().not().isEmpty().withMessage("Campo requerido")
+      .isLength({min:5}).withMessage("Rango Incorrecto"),
+      body("idDetalleProducto").trim().not().isEmpty().withMessage("Campo requerido")
+  ]
+}

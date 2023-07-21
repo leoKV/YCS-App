@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../connections/database"));
 class ProductoDatabase {
+    //Métodos para listar
     listar() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -31,6 +32,15 @@ class ProductoDatabase {
             return result;
         });
     }
+    listarImagenByProductDetailId(idDetalleProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" SELECT * FROM tblImagenProducto WHERE idDetalleProducto =? ", [idDetalleProducto]);
+            }));
+            return result;
+        });
+    }
+    //Métodos para insertar
     insertar(producto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -47,6 +57,15 @@ class ProductoDatabase {
             return result;
         });
     }
+    insertarImagenProducto(imagenProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" INSERT INTO tblImagenProducto SET ? ", [imagenProducto]);
+            }));
+            return result;
+        });
+    }
+    //Métodos para actualizar
     actualizar(producto, idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -63,6 +82,15 @@ class ProductoDatabase {
             return result;
         });
     }
+    actualizarImagenProducto(imagenProducto, idImagen) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" UPDATE tblImagenProducto SET ? WHERE idImagen = ? ", [imagenProducto, idImagen]);
+            }));
+            return result;
+        });
+    }
+    //Métodos para eliminar
     eliminar(idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -83,6 +111,14 @@ class ProductoDatabase {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 return yield connection.query(" DELETE FROM tblDetalleProducto WHERE idProducto =? ", [idProducto]);
+            }));
+            return result;
+        });
+    }
+    eliminarImagenProducto(idImagen) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" DELETE FROM tblImagenProducto WHERE idImagen =? ", [idImagen]);
             }));
             return result;
         });

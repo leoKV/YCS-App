@@ -1,8 +1,6 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { utils } from "../utils/utils";
 import daoP from "../database/productoDatabase";
-import dao from "../database/usuarioDatabase";
-
 class ProductoController{
     //Método para listar todos los productos de la tabla tblProducto
     public async listar(req:Request, res: Response){
@@ -15,6 +13,7 @@ class ProductoController{
         }
     }
 
+    //Método para listar del detalle de un producto en base a su id de producto
     public async listarDetalleByProductId(req:Request,res:Response){
         try{
             var idProducto = req.body.idProducto;
@@ -22,6 +21,20 @@ class ProductoController{
             var detalleProducto = await daoP.listarDetalleByProductId(idProducto);
             return res.json(detalleProducto);
         }catch(error){
+            console.error(error);
+            return res.status(500).json({mensaje:"Ocurrió un error"});
+        }
+    }
+
+    //Método para listar las imagenes en base a su id de detalle del producto
+    public async listarImagenByProductDetailId(req:Request,res:Response){
+        try{
+            var idDetalleProducto = req.body.idDetalleProducto;
+
+            var imagenProducto = await daoP.listarImagenByProductDetailId(idDetalleProducto);
+            return res.json(imagenProducto);
+        }
+        catch(error){
             console.error(error);
             return res.status(500).json({mensaje:"Ocurrió un error"});
         }
@@ -70,6 +83,24 @@ class ProductoController{
         }
     }
 
+    //Método para insetar la imagenes del producto
+    public async insertarImagenProducto(req:Request, res:Response){
+        try{
+            var {...imagenProducto}= req.body;
+            const result = await daoP.insertarImagenProducto(imagenProducto);
+
+            if (result.affectedRows > 0) {
+                return res.json({ mensaje: "Imagen del producto agregada correctamente" }); 
+            } else {
+                return res.status(505).json({ mensaje: "Ocurrió un error" });
+            }
+        }catch(error){
+            console.error(error);
+            return res.status(500).json({mensaje:"Ocurrió un error"});
+        }
+    }
+
+
     //Método para actualizar productos de la tabla tblProducto
     public async actualizar(req:Request, res: Response){
         try{
@@ -102,6 +133,22 @@ class ProductoController{
             const result = await daoP.actualizarDetalleProducto(detalleProducto,idDetalleProducto);
             if (result.affectedRows > 0) {
                 return res.json({ mensaje: "Detalle del producto actualizado correctamente" })
+            } else {
+                return res.status(500).json({ mensaje: "ocurrió un error" })
+            }
+        }catch(error){
+            console.error(error);
+            return res.status(500).json({mensaje:"Ocurrió un error"});
+        }
+    }
+
+    //Método para actualizar la imagen del producto
+    public async actualizarImagenProducto(req:Request, res: Response){
+        try{        
+            var {idImagen,...imagenProducto} = req.body;
+            const result = await daoP.actualizarImagenProducto(imagenProducto,idImagen)
+            if (result.affectedRows > 0) {
+                return res.json({ mensaje: "Imagen del producto actualizada correctamente" })
             } else {
                 return res.status(500).json({ mensaje: "ocurrió un error" })
             }
@@ -151,6 +198,22 @@ class ProductoController{
             const result = await daoP.eliminarDetalleByProductId(idProducto);
             if(result.affectedRows > 0){
                 return res.json({ mensaje: 'Detalle(s) del producto eliminado(s) correctamente'});
+            }else{
+                return res.status(500).json({ mensaje:'Ocurrió un error'});
+            }
+        }catch(error){
+            console.error(error);
+            return res.status(500).json({mensaje:"Ocurrió un error"});
+        }
+    }
+
+    //Método para eliminar imagen de un producto
+    public async eliminarImagenProducto(req:Request,res:Response){
+        try{
+            var idImagen:number = parseInt(req.params.idImagen);
+            const result = await daoP.eliminarImagenProducto(idImagen);
+            if(result.affectedRows > 0){
+                return res.json({ mensaje: 'Imagen del producto eliminada correctamente'});
             }else{
                 return res.status(500).json({ mensaje:'Ocurrió un error'});
             }
