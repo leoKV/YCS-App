@@ -14,12 +14,11 @@ import { LoadingInterceptor } from '../app/shared/interceptor/loading.intercepto
 import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
