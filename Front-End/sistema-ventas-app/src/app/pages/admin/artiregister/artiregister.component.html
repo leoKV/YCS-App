@@ -1,31 +1,48 @@
 <mat-card class="small-card">
-    <div class="cuerpo">
+  <div class="cuerpo">
 
-        <div class="centered-container">
-          <mat-card class="card">
-            <mat-card-content>
-                <h1>Registro de Nuevo Articulo</h1>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="width: 100%;">
-                  <input matInput type="text">
-                  <mat-label>Nombre</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="text">
-                  <mat-label>Descripción</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="email">
-                  <mat-label>URL de la Imagen</mat-label>
-                </mat-form-field>
-              </div>
-              <button mat-button color="primary">Registrar Nuevo Articulo</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+    <div class="centered-container">
+      <h1>Registro de Nuevo Producto</h1>
+      <mat-card-content>
+        <form [formGroup]="productoForm" (ngSubmit)="onSave()">
+          <div class="form-field">
+            <mat-form-field class="inputs" style="width: 100%;">
+              <input matInput type="text" formControlName="nombre">
+              <mat-error
+                *ngIf="baseForm.isValidField(productoForm.get('nombre'))">
+                {{ baseForm.getErrorMessage(productoForm.get('nombre')) }}
+              </mat-error>
+              <mat-label>Nombre</mat-label>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field class="inputs"
+              style="margin-right: 10px; width: 100%; ">
+              <input matInput type="text" formControlName="descripcion">
+              <mat-error
+                *ngIf="baseForm.isValidField(productoForm.get('descripcion'))">
+                {{ baseForm.getErrorMessage(productoForm.get('descripcion')) }}
+              </mat-error>
+              <mat-label>Descripción</mat-label>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field class="full-width mb-3" appearance="outline">
+              <mat-label>Categoría</mat-label>
+              <mat-select formControlName="idCategoria">
+                <mat-option *ngFor="let categoria of categorias"
+                  [value]="categoria.idCategoria">
+                  {{categoria.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                {{baseForm.getErrorMessage(productoForm.get('idCategoria'))}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-button color="primary">Registrar Nuevo Producto</button>
+        </form>
+      </mat-card-content>
+    </div>
+  </div>
 </mat-card>
