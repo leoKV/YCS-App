@@ -12,6 +12,17 @@ class GeneralDatabase{
         });
         return result;
     }
+
+    public async listarCategorias(){
+        const result = await pool.then(async(connection)=>{
+            return await connection.query(
+                " SELECT idCategoria, nombre, descripcion"
+                +" FROM tblcategoria "
+            );
+
+        });
+        return result;
+    }
 }
 const dao = new GeneralDatabase();
 export default dao;

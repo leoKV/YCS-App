@@ -23,6 +23,15 @@ class GeneralDatabase {
             return result;
         });
     }
+    listarCategorias() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" SELECT idCategoria, nombre, descripcion"
+                    + " FROM tblcategoria ");
+            }));
+            return result;
+        });
+    }
 }
 const dao = new GeneralDatabase();
 exports.default = dao;
