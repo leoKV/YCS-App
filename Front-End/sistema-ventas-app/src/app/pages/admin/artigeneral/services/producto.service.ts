@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ProductoResponse } from '../../../../shared/models/producto.interface';
+import { ProductoDetalleResponse } from '../../../../shared/models/producto.detalle.interface';
 import { environment } from '@env/environment.development';
 import { Observable, catchError, throwError } from 'rxjs';
 
@@ -19,6 +20,12 @@ export class ProductoService {
     return this.http.get<ProductoResponse[]>(`${environment.API_URL}/producto`, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
+
+  getProducto(): Observable<ProductoResponse[]> {
+    return this.http.get<ProductoResponse[]>(`${environment.API_URL}/producto/detalle/id`, { headers: { "requireToken": "true" } })
+      .pipe(catchError((error) => this.handlerError(error)));
+  }
+
   getCategorias() {
     return this.http.get<any>(`${environment.API_URL}/general/categorias`, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
@@ -26,6 +33,11 @@ export class ProductoService {
 
   new(producto: ProductoResponse): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/producto`, producto, { headers: { "requireToken": "true" } })
+      .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+  newDetalle(productoDetalle: ProductoDetalleResponse): Observable<any> {
+    return this.http.post<any>(`${environment.API_URL}/producto/detalle`, productoDetalle, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 

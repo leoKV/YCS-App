@@ -1,48 +1,37 @@
-<mat-card class="small-card">
-  <div class="cuerpo">
-
-    <div class="centered-container">
-      <h1>Registro de Nuevo Producto</h1>
-      <mat-card-content>
-        <form [formGroup]="productoForm" (ngSubmit)="onSave()">
-          <div class="form-field">
-            <mat-form-field class="inputs" style="width: 100%;">
-              <input matInput type="text" formControlName="nombre">
-              <mat-error
-                *ngIf="baseForm.isValidField(productoForm.get('nombre'))">
-                {{ baseForm.getErrorMessage(productoForm.get('nombre')) }}
-              </mat-error>
-              <mat-label>Nombre</mat-label>
-            </mat-form-field>
-          </div>
-          <div class="form-field">
-            <mat-form-field class="inputs"
-              style="margin-right: 10px; width: 100%; ">
-              <input matInput type="text" formControlName="descripcion">
-              <mat-error
-                *ngIf="baseForm.isValidField(productoForm.get('descripcion'))">
-                {{ baseForm.getErrorMessage(productoForm.get('descripcion')) }}
-              </mat-error>
-              <mat-label>Descripción</mat-label>
-            </mat-form-field>
-          </div>
-          <div class="form-field">
-            <mat-form-field class="full-width mb-3" appearance="outline">
-              <mat-label>Categoría</mat-label>
-              <mat-select formControlName="idCategoria">
-                <mat-option *ngFor="let categoria of categorias"
-                  [value]="categoria.idCategoria">
-                  {{categoria.nombre}}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                {{baseForm.getErrorMessage(productoForm.get('idCategoria'))}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <button mat-button color="primary">Registrar Nuevo Producto</button>
-        </form>
-      </mat-card-content>
+<div class="bodymain">
+  <div class="row align-items-center">
+    <div class="col">
+      <p class="h2"
+        style="justify-content: center; display: flex; align-items: center; padding: 3%;">Productos</p>
+      <th scope="col" style="padding: 3%;"><button type="button"
+          class="btn btn-success" (click)="onOpenModal()">Añadir Nuevo Producto</button></th>
+      <table class="table" style="padding: 3%;">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Fecha Registro</th>
+            <th scope="col">Responsable Registro</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos">
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.nombreCategoria}}</td>
+            <td>{{ producto.fecha_Registro | date: 'dd/MM/yyyy' }}</td>
+            <td>{{producto.nombreUsuario}}</td>
+            <td>
+              <button type="button" class="btn btn-warning"
+                (click)="onOpenModalDetalle(producto.idProducto)">Añadir Detalle</button>
+              <button type="button" class="btn btn-info"
+                (click)="onOpenModal(producto)">Editar</button>
+              <button type="button" class="btn btn-danger"
+                (click)="onDelete(producto.idProducto)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</mat-card>
+</div>

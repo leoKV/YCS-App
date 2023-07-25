@@ -1,5 +1,3 @@
-import { Categoria } from "./categoria.interface";
-
 export interface ProductoResponse {
     idProducto: number;
     nombre: string;
@@ -7,5 +5,6 @@ export interface ProductoResponse {
     idCategoria: number;
     idRegistro?: number;
     fecha_Registro?: Date;
-    nombreCategoria? : string;
+    nombreCategoria: string;
+    nombreUsuario: string;
 }

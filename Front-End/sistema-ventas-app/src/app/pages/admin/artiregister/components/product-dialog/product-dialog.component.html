@@ -1,52 +1,67 @@
-<h1 mat-dialog-title>{{ data?.title}}</h1>
+<!-- El título del diálogo -->
+<h1 mat-dialog-title>{{ title }}</h1>
 <br>
+
+<!-- Contenido del diálogo -->
 <mat-dialog-content class="formulario-vertical">
+    <!-- Formulario para el producto, se asocia al método 'onSave()' en el evento 'submit' -->
     <form [formGroup]="productoForm" (submit)="onSave()">
+        <!-- Campo de entrada para el nombre del producto -->
         <mat-form-field class="full-width mb-3" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input type="text" formControlName="nombre" matInput>
+            <!-- Muestra mensajes de error si el campo es inválido -->
             <mat-error>
-                {{baseForm.getErrorMessage(productoForm.get('nombre'))}}
+                {{ baseForm.getErrorMessage(productoForm.get('nombre')) }}
             </mat-error>
         </mat-form-field>
 
+        <!-- Campo de entrada para la descripción del producto -->
         <mat-form-field class="full-width mb-3" appearance="outline">
             <mat-label>Descripción</mat-label>
             <input type="text" formControlName="descripcion" matInput>
+            <!-- Muestra mensajes de error si el campo es inválido -->
             <mat-error>
-                {{baseForm.getErrorMessage(productoForm.get('descripcion'))}}
+                {{ baseForm.getErrorMessage(productoForm.get('descripcion')) }}
             </mat-error>
         </mat-form-field>
 
+        <!-- Campo de selección para la categoría del producto -->
         <mat-form-field class="full-width mb-3" appearance="outline">
             <mat-label>Categoría</mat-label>
             <mat-select formControlName="idCategoria">
+                <!-- Itera sobre las categorías disponibles y muestra opciones de selección -->
                 <mat-option *ngFor="let categoria of categorias"
                     [value]="categoria.idCategoria">
-                    {{categoria.nombre}}
+                    {{ categoria.nombre }}
                 </mat-option>
             </mat-select>
+            <!-- Muestra mensajes de error si el campo es inválido -->
             <mat-error>
-                {{baseForm.getErrorMessage(productoForm.get('idCategoria'))}}
+                {{ baseForm.getErrorMessage(productoForm.get('idCategoria')) }}
             </mat-error>
         </mat-form-field>
 
+        <!-- Botones de acción del formulario -->
         <div align="center">
+            <!-- Botón para guardar el producto -->
             <button class="me-2" type="submit" mat-raised-button color="primary">
                 <mat-icon>save</mat-icon>
                 {{ titleButton }}
             </button>
 
+            <!-- Botón para limpiar el formulario -->
             <button mat-raised-button color="warn" (click)="onClear()">
                 <mat-icon>clear</mat-icon>
                 Limpiar
             </button>
         </div>
-
     </form>
 </mat-dialog-content>
 
+<!-- Acciones del diálogo alineadas a la derecha -->
 <mat-dialog-actions align="end">
+    <!-- Botón para cerrar el diálogo sin guardar cambios -->
     <button mat-button mat-dialog-close>
         <mat-icon>close</mat-icon>
         Cerrar
