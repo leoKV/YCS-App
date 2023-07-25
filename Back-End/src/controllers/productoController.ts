@@ -1,4 +1,4 @@
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { utils } from "../utils/utils";
 import daoP from "../database/productoDatabase";
 class ProductoController{

@@ -15,11 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../connections/database"));
 class ProductoDatabase {
     //Métodos para listar
+    //Método para listar productos con el nombre de la categoría y el nombre del usuario
     listar() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                // return await connection.query(" SELECT * FROM tblProducto WHERE idProducto = ? ",[idProducto] );
-                return yield connection.query(" SELECT * FROM tblProducto ");
+                return yield connection.query(`
+            SELECT p.*, c.nombre AS nombreCategoria,
+            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario
+            FROM tblProducto p
+            INNER JOIN tblCategoria c ON p.idCategoria = c.idCategoria
+            INNER JOIN tblUsuario u ON p.idRegistro = u.idUsuario
+        `);
             }));
             return result;
         });
