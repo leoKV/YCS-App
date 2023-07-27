@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CategoriasService } from '../../auth/services/categorias.service';
+import { CategoriasService } from '../services/categorias.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class CateregisterComponent implements OnInit {
 
-  nuevaCategoriaForm: FormGroup; // Inicializa nuevaCategoriaForm como FormGroup
+  nuevaCategoriaForm: FormGroup; 
 
   constructor(
     private formBuilder: FormBuilder,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CategoriasService } from '../app/pages/admin/services/categorias.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +14,17 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from '../app/shared/interceptor/loading.interceptor';
 import { TokenInterceptor } from '../app/shared/interceptor/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -28,9 +34,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidebarModule,
     HttpClientModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule, 
+    MatButtonModule
   ],
   providers: [
+    CategoriasService,
     {provide: HTTP_INTERCEPTORS, useClass:LoadingInterceptor,multi:true},
     {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor,multi:true}
   ],

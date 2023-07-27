@@ -9,15 +9,16 @@ import { catchError } from 'rxjs/operators';
 export class CategoriasService {
   // Propiedad para indicar que se necesita el token de autorización
   private httpOptions = { headers: new HttpHeaders({ 'requireToken': 'true' }) };
-  private apiUrl = 'http://localhost:3000/api'; //  URL de back-end
+  private apiUrl = 'http://localhost:3000/api'; // URL de back-end
 
   constructor(private http: HttpClient) { }
 
-  getIdRegisterFromSession(): number {
-    // obtener el idRegister de la sesión.
-    const idRegister = sessionStorage.getItem('idRegister');
-    console.log('idRegister:', idRegister);
-    return idRegister ? +idRegister : 0; // Convierte a número o devuelve 0 si no se encuentra el idRegister en la sesión.
+  // Método para obtener el token desde el sessionStorage
+  getTokenFromSession(): string | null {
+    // Obtener el token JWT de la sesión. Reemplaza 'idRegister' con el nombre correcto si es diferente.
+    const token = localStorage.getItem('token'); // Modificar el nombre aquí
+    console.log('Token JWT:', token);
+    return token;
   }
   // Método para obtener todas las categorías
   getCategorias(): Observable<any> {
@@ -33,17 +34,27 @@ export class CategoriasService {
       catchError(this.handleError)
     );
   }
-  // Método para actualizar una categoría existente
   actualizarCategoria(idCategoria: number, categoria: any): Observable<any> {
     const url = `${this.apiUrl}/categorias/${idCategoria}`;
-    return this.http.put<any>(url, categoria, this.httpOptions).pipe( // Usar httpOptions en lugar de getHeaders()
+    const token = this.getTokenFromSession(); // Obtener el token
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'auth': `Bearer ${token}` // Modificar el nombre del encabezado a 'auth'
+      })
+    };
+    return this.http.put<any>(url, categoria, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
-  // Método para eliminar una categoría
   eliminarCategoria(idCategoria: number): Observable<any> {
     const url = `${this.apiUrl}/categorias/${idCategoria}`;
-    return this.http.delete<any>(url, this.httpOptions).pipe( // Usar httpOptions en lugar de getHeaders()
+    const token = this.getTokenFromSession(); // Obtener el token
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'auth': `Bearer ${token}` // Modificar el nombre del encabezado a 'auth'
+      })
+    };
+    return this.http.delete<any>(url, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
