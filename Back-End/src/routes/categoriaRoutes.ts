@@ -14,11 +14,11 @@ class CategoriaRoutes {
 
   private config() {
     // Listar
-    this.router.get("/", [jwtCheck], categoriaController.listar);
+    this.router.get("/", categoriaController.listar);
     // Insertar
     this.router.post("/", insertValidationRules(), categoriaController.insertar);
     // Actualizar
-    this.router.put("/", insertValidationRules(), categoriaController.actualizar);
+    this.router.put("/:idCategoria", insertValidationRules(), categoriaController.actualizar);
     // Eliminar
     this.router.delete("/:idCategoria", categoriaController.eliminar);
   }
