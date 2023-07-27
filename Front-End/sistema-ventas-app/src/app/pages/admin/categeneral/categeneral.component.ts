@@ -33,7 +33,7 @@ export class CategeneralComponent implements OnInit, OnDestroy {
     if (token) {
       const httpOptions = {
         headers: new HttpHeaders({
-          Authorization: `Bearer ${token}` // Agregar el token en el encabezado Authorization
+          Authorization: `Bearer ${token}`
         })
       };
 

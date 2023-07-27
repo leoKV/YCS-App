@@ -9,14 +9,14 @@ import { catchError } from 'rxjs/operators';
 export class CategoriasService {
   // Propiedad para indicar que se necesita el token de autorización
   private httpOptions = { headers: new HttpHeaders({ 'requireToken': 'true' }) };
-  private apiUrl = 'http://localhost:3000/api'; // URL de back-end
+  private apiUrl = 'http://localhost:3000/api'; 
 
   constructor(private http: HttpClient) { }
 
   // Método para obtener el token desde el sessionStorage
   getTokenFromSession(): string | null {
-    // Obtener el token JWT de la sesión. Reemplaza 'idRegister' con el nombre correcto si es diferente.
-    const token = localStorage.getItem('token'); // Modificar el nombre aquí
+    // Obtener el token JWT de la sesión
+    const token = localStorage.getItem('token'); 
     console.log('Token JWT:', token);
     return token;
   }
@@ -30,7 +30,7 @@ export class CategoriasService {
   // Método para agregar una nueva categoría
   agregarCategoria(categoria: any): Observable<any> {
     const url = `${this.apiUrl}/categorias`;
-    return this.http.post<any>(url, categoria, this.httpOptions).pipe( // Usar httpOptions en lugar de getHeaders()
+    return this.http.post<any>(url, categoria, this.httpOptions).pipe( 
       catchError(this.handleError)
     );
   }
@@ -39,7 +39,7 @@ export class CategoriasService {
     const token = this.getTokenFromSession(); // Obtener el token
     const httpOptions = {
       headers: new HttpHeaders({
-        'auth': `Bearer ${token}` // Modificar el nombre del encabezado a 'auth'
+        'auth': `Bearer ${token}` 
       })
     };
     return this.http.put<any>(url, categoria, httpOptions).pipe(
@@ -51,7 +51,7 @@ export class CategoriasService {
     const token = this.getTokenFromSession(); // Obtener el token
     const httpOptions = {
       headers: new HttpHeaders({
-        'auth': `Bearer ${token}` // Modificar el nombre del encabezado a 'auth'
+        'auth': `Bearer ${token}` 
       })
     };
     return this.http.delete<any>(url, httpOptions).pipe(
