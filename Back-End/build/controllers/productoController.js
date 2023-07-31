@@ -44,7 +44,7 @@ class ProductoController {
     listarDetalleByProductId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                var idProducto = req.body.idProducto;
+                var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
                 var detalleProducto = yield productoDatabase_1.default.listarDetalleByProductId(idProducto);
                 return res.json(detalleProducto);
             }

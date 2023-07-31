@@ -16,7 +16,7 @@ class ProductoRoutes{
         //Listar producto
         this.router.get("/",[jwtCheck],productoController.listar)
         //Listar detalle del producto por el id
-        this.router.get("/detalle",[jwtCheck],productoController.listarDetalleByProductId)
+        this.router.get("/detalle/:idProducto", [jwtCheck], productoController.listarDetalleByProductId)
         //Listar imagen del producto por el id del detalle
         this.router.get("/detalle/imagen",[jwtCheck],productoController.listarImagenByProductDetailId)
 
@@ -25,7 +25,7 @@ class ProductoRoutes{
         //Insertar detalle del producto
         this.router.post("/detalle",insertDetailValidationRules(),[jwtCheck,validate],productoController.insertarDetalleProducto)
         //Insertar imagen del producto
-        this.router.post("/detalle/imagen",insertImageValidationRules(),[jwtCheck,validate],productoController.insertarImagenProducto)
+        this.router.post("/detalle/imagen",[jwtCheck,validate],productoController.insertarImagenProducto)
     
         //Actualizar producto
         this.router.put("/",updateValidationRules(),[jwtCheck,validate],productoController.actualizar)

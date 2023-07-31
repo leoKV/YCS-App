@@ -14,7 +14,7 @@ class ProductoRoutes {
         //Listar producto
         this.router.get("/", [jwtCheck_1.jwtCheck], productoController_1.productoController.listar);
         //Listar detalle del producto por el id
-        this.router.get("/detalle", [jwtCheck_1.jwtCheck], productoController_1.productoController.listarDetalleByProductId);
+        this.router.get("/detalle/:idProducto", [jwtCheck_1.jwtCheck], productoController_1.productoController.listarDetalleByProductId);
         //Listar imagen del producto por el id del detalle
         this.router.get("/detalle/imagen", [jwtCheck_1.jwtCheck], productoController_1.productoController.listarImagenByProductDetailId);
         //Insertar producto
@@ -22,7 +22,7 @@ class ProductoRoutes {
         //Insertar detalle del producto
         this.router.post("/detalle", (0, ProductoValidatorRules_1.insertDetailValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.insertarDetalleProducto);
         //Insertar imagen del producto
-        this.router.post("/detalle/imagen", (0, ProductoValidatorRules_1.insertImageValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.insertarImagenProducto);
+        this.router.post("/detalle/imagen", [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.insertarImagenProducto);
         //Actualizar producto
         this.router.put("/", (0, ProductoValidatorRules_1.updateValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], productoController_1.productoController.actualizar);
         //Actualizar detalle del producto
