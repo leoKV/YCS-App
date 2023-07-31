@@ -12,52 +12,57 @@ import { ProductoDetalleResponse } from '../../../../shared/models/producto.deta
 })
 export class ProductoService {
 
-  constructor(private snackBar: MatSnackBar,
-    private http: HttpClient) { }
+  constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
-  // Obtener la lista de productos desde la API
+  // Método para obtener la lista de productos desde la API
   getProductos(): Observable<ProductoResponse[]> {
     return this.http.get<ProductoResponse[]>(`${environment.API_URL}/producto`, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Obtener la lista de categorías desde la API
+  // Método para obtener la lista de categorías desde la API
   getCategorias() {
     return this.http.get<any>(`${environment.API_URL}/general/categorias`, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Obtener la lista de detalles de productos desde la API
-  getDetalleProductos() {
-    return this.http.get<any>(`${environment.API_URL}/producto/detalle`, { headers: { "requireToken": "true" } })
+  // Método para obtener la lista de detalles de productos desde la API
+  getDetalleProducto(idProducto: number) {
+    return this.http.get<any>(`${environment.API_URL}/producto/detalle/${idProducto}`, { headers: { "requireToken": "true" } })
       .pipe(tap(response => console.log("Detalles de producto recibidos:", response)), catchError((error) => this.handlerError(error)));
   }
 
-  // Crear un nuevo producto en la API
+  // Método para crear un nuevo producto en la API
   new(producto: ProductoResponse): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/producto`, producto, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Crear un nuevo detalle de producto en la API
+  // Método para crear un nuevo detalle de producto en la API
   newDetalle(productoDetalle: ProductoDetalleResponse): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/producto/detalle`, productoDetalle, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Actualizar un producto en la API
+  // Método para actualizar un producto en la API
   update(producto: ProductoResponse): Observable<any> {
     return this.http.put<any>(`${environment.API_URL}/producto`, producto, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Eliminar un producto por su ID en la API
+  // Método para actualizar un detalle de producto en la API
+  updateDetalle(productoDetalle: ProductoDetalleResponse): Observable<any> {
+    return this.http.put<any>(`${environment.API_URL}/producto/detalle`, productoDetalle, { headers: { "requireToken": "true" } })
+      .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+  // Método para eliminar un producto por su ID en la API
   delete(idProducto: number): Observable<any> {
     return this.http.delete<any>(`${environment.API_URL}/producto/${idProducto}`, { headers: { "requireToken": "true" } })
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
-  // Manejar errores de la API
+  // Método para manejar errores de la API
   handlerError(error: any): Observable<never> {
     console.log("Error");
     let errorMessage = "Ocurrió un error";

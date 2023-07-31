@@ -1,11 +1,18 @@
+<!-- Contenedor principal -->
 <div class="bodymain">
   <div class="row align-items-center">
     <div class="col">
-      <p class="h2"
-        style="justify-content: center; display: flex; align-items: center; padding: 3%;">Productos</p>
-      <th scope="col" style="padding: 3%;"><button type="button"
-          class="btn btn-success" (click)="onOpenModal()">Añadir Nuevo Producto</button></th>
-      <table class="table" style="padding: 3%;">
+      <!-- Título principal -->
+      <p class="h2">Productos</p>
+
+      <!-- Botón para agregar un nuevo producto -->
+      <button type="button" class="btn btn-success" (click)="onOpenModal()">Añadir
+        Nuevo Producto</button>
+      <br>
+      <br>
+
+      <!-- Tabla para mostrar la lista de productos -->
+      <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -16,18 +23,39 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Iteración a través de la lista de productos para mostrar cada fila de la tabla -->
           <tr *ngFor="let producto of productos">
+            <!-- Datos de cada producto -->
             <td>{{producto.nombre}}</td>
             <td>{{producto.nombreCategoria}}</td>
             <td>{{ producto.fecha_Registro | date: 'dd/MM/yyyy' }}</td>
             <td>{{producto.nombreUsuario}}</td>
+
+            <!-- Columna de acciones -->
             <td>
+              <!-- Botón para añadir un detalle al producto -->
               <button type="button" class="btn btn-warning"
-                (click)="onOpenModalDetalle(producto.idProducto)">Añadir Detalle</button>
+                (click)="onOpenModalDetalle(producto.idProducto)">
+                Añadir Detalle
+              </button>
+
+              <!-- Botón para ver los detalles completos del producto -->
+              <button type="button" class="btn btn-primary"
+                (click)="onGoToDetails(producto.idProducto)">
+                Ver Detalles del Producto
+              </button>
+
+              <!-- Botón para editar el producto -->
               <button type="button" class="btn btn-info"
-                (click)="onOpenModal(producto)">Editar</button>
+                (click)="onOpenModal(producto)">
+                Editar
+              </button>
+
+              <!-- Botón para eliminar el producto -->
               <button type="button" class="btn btn-danger"
-                (click)="onDelete(producto.idProducto)">Eliminar</button>
+                (click)="onDelete(producto.idProducto)">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>

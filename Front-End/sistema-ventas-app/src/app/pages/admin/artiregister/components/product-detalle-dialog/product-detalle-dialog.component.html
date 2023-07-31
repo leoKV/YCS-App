@@ -1,59 +1,75 @@
-<h1 mat-dialog-title>{{ data?.title}}</h1>
-<br>
+<!-- Título del diálogo modal -->
+<h1 mat-dialog-title>{{ data?.title }}</h1>
+<br />
+
+<!-- Contenido del diálogo modal -->
 <mat-dialog-content class="formulario-vertical">
-    <form [formGroup]="productoDetalleForm" (submit)="onSave()">
-        
-        <mat-form-field class="full-width mb-3" appearance="outline">
-            <mat-label>Talla</mat-label>
-            <mat-select formControlName="talla">
-                <mat-option [value]="'Grande'">Grande</mat-option>
-                <mat-option [value]="'Mediana'">Mediana</mat-option>
-                <mat-option [value]="'Chica'">Chica</mat-option>
-            </mat-select>
-            <mat-error>
-                {{baseForm.getErrorMessage(productoDetalleForm.get('talla'))}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width mb-3" appearance="outline">
-            <mat-label>Color</mat-label>
-            <input type="text" formControlName="color" matInput>
-            <mat-error>
-                {{baseForm.getErrorMessage(productoDetalleForm.get('color'))}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width mb-3" appearance="outline">
-            <mat-label>Precio Unitario</mat-label>
-            <input type="number" formControlName="precioUnitario" matInput>
-            <mat-error>
-                {{baseForm.getErrorMessage(productoDetalleForm.get('precioUnitario'))}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width mb-3" appearance="outline">
-            <mat-label>Stock</mat-label>
-            <input type="number" formControlName="stock" matInput>
-            <mat-error>
-                {{baseForm.getErrorMessage(productoDetalleForm.get('stock'))}}
-            </mat-error>
-        </mat-form-field>
+  <!-- Formulario con formGroup "productoDetalleForm" y evento de submit "onSave()" -->
+  <form [formGroup]="productoDetalleForm" (submit)="onSave()">
 
-        <div align="center">
-            <button class="me-2" type="submit" mat-raised-button color="primary">
-                <mat-icon>save</mat-icon>
-                {{ titleButton }}
-            </button>
+    <!-- Campo "Talla" con un menú desplegable -->
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Talla</mat-label>
+      <mat-select formControlName="talla">
+        <mat-option [value]="'XS'">XS</mat-option>
+        <mat-option [value]="'S'">S</mat-option>
+        <mat-option [value]="'M'">M</mat-option>
+        <mat-option [value]="'L'">L</mat-option>
+        <mat-option [value]="'XL'">XL</mat-option>
+      </mat-select>
+      <mat-error>
+        {{ baseForm.getErrorMessage(productoDetalleForm.get('talla')) }}
+      </mat-error>
+    </mat-form-field>
 
-            <button mat-raised-button color="warn" (click)="onClear()">
-                <mat-icon>clear</mat-icon>
-                Limpiar
-            </button>
-        </div>
+    <!-- Campo "Color" con un campo de entrada de texto -->
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Color</mat-label>
+      <input type="text" formControlName="color" matInput />
+      <mat-error>
+        {{ baseForm.getErrorMessage(productoDetalleForm.get('color')) }}
+      </mat-error>
+    </mat-form-field>
 
-    </form>
+    <!-- Campo "Precio Unitario" con un campo de entrada de número -->
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Precio Unitario</mat-label>
+      <input type="number" formControlName="precioUnitario" matInput />
+      <mat-error>
+        {{ baseForm.getErrorMessage(productoDetalleForm.get('precioUnitario'))
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo "Stock" con un campo de entrada de número -->
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Stock</mat-label>
+      <input type="number" formControlName="stock" matInput />
+      <mat-error>
+        {{ baseForm.getErrorMessage(productoDetalleForm.get('stock')) }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botones para enviar o limpiar el formulario -->
+    <div align="center">
+      <button class="me-2" type="submit" mat-raised-button color="primary">
+        <mat-icon>save</mat-icon>
+        {{ titleButton }}
+      </button>
+
+      <button mat-raised-button color="warn" (click)="onClear()">
+        <mat-icon>clear</mat-icon>
+        Limpiar
+      </button>
+    </div>
+
+  </form>
 </mat-dialog-content>
 
+<!-- Acciones del diálogo modal (botón para cerrar el diálogo) -->
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>
-        <mat-icon>close</mat-icon>
-        Cerrar
-    </button>
+  <button mat-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    Cerrar
+  </button>
 </mat-dialog-actions>

@@ -1,5 +1,5 @@
-// Importar módulos y componentes necesarios
-import { Component, OnDestroy, OnInit } from '@angular/core';
+// Importaciones de módulos y clases
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductoService } from '../artiregister/services/producto.service';
@@ -12,9 +12,10 @@ import { ProductDialogComponent } from '../artiregister/components/product-dialo
 import { SharedDataService } from './services/shared-data-service.service';
 import { ProductDetalleDialogComponent } from './components/product-detalle-dialog/product-detalle-dialog.component';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-// Enumeración para representar las acciones (NEW: nuevo, EDIT: editar)
+// Enumeración para definir las acciones (nuevo, editar)
 enum Action {
   NEW = 'new',
   EDIT = 'edit'
@@ -26,54 +27,61 @@ enum Action {
   styleUrls: ['./artiregister.component.scss']
 })
 export class ArtiregisterComponent implements OnInit, OnDestroy {
-  // Crear una variable de tipo Subject para gestionar la desuscripción
+  // Utilizado para manejar la desuscripción de observables
   private destroy$ = new Subject();
 
-  // Arreglos para almacenar datos de productos, categorías y detalles
+  // Arreglos para almacenar productos, categorías y detalles de producto
   productos: ProductoResponse[] = [];
   categorias: CategoriaResponse[] = [];
   detalles: ProductoDetalleResponse[] = [];
 
-  // Variable para controlar la acción a realizar (nuevo o editar)
+  // Variable para indicar la acción actual (nuevo o editar)
   actionTODO = Action.NEW;
 
-  // Constructor con inyección de dependencias
+  // Definir las columnas para la tabla
+  columns: any[] = [
+    { prop: 'nombre', name: 'Nombre', sortable: true, width: 200 },
+    { prop: 'nombreCategoria', name: 'Categoría', sortable: true, width: 200 },
+    { prop: 'fecha_Registro', name: 'Fecha Registro', sortable: true, width: 150 },
+    { prop: 'nombreUsuario', name: 'Responsable Registro', sortable: true, width: 200 },
+    { name: 'Acciones', cellTemplate: null, width: 250 }
+  ];
+
+  // Referencia a la tabla ngx-datatable
+  @ViewChild('table') table: any;
+
+  // Variables para los filtros
+  filterNombre: string = '';
+  filterCategoria: string = '';
+  filterFecha: string = '';
+  filterResponsable: string = '';
+
   constructor(
     private productoSvc: ProductoService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
-    private sharedDataService: SharedDataService // Inyectar el servicio compartido
+    private sharedDataService: SharedDataService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    // Llamar al método para obtener la lista de productos
+    // Obtener la lista de productos y categorías al inicializar el componente
     this.listar();
-    this.listarDetalle();
-
-    // Obtener las categorías del servicio usando RxJS 'takeUntil' para gestionar las suscripciones
     this.productoSvc.getCategorias().pipe(takeUntil(this.destroy$)).subscribe((categorias: CategoriaResponse[]) => {
       this.categorias = categorias;
     });
   }
 
-  // Método privado para obtener la lista de productos
+  // Método para obtener la lista de productos
   private listar() {
     this.productoSvc.getProductos().pipe(takeUntil(this.destroy$)).subscribe((productos) => {
       this.productos = productos;
     });
   }
 
-  // Método privado para obtener la lista de detalles de productos
-  private listarDetalle() {
-    this.productoSvc.getDetalleProductos().pipe(takeUntil(this.destroy$)).subscribe((detalles) => {
-      this.detalles = detalles;
-    });
-  }
-
-  // Método para abrir el diálogo para agregar o editar un producto
+  // Método para abrir el diálogo de registro o edición de productos
   onOpenModal(producto?: ProductoResponse) {
-    // Definir los datos que se enviarán al diálogo
     const data = {
       title: this.actionTODO === Action.NEW ? 'Registro de productos' : 'Editar producto',
       producto: producto || null,
@@ -81,17 +89,15 @@ export class ArtiregisterComponent implements OnInit, OnDestroy {
 
     this.sharedDataService.setProductoData(data);
 
-    // Abrir el diálogo usando el componente ProductDialogComponent
     const dialogRef = this.dialog.open(ProductDialogComponent, {
       minWidth: '60%',
     });
 
-    // Suscribirse al resultado del diálogo después de cerrarse
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
         if (result) {
-          // Si se obtiene un resultado válido, actualizar la lista de productos y mostrar un mensaje de éxito
+          // Actualizar la lista de productos después de guardar o editar
           this.listar();
           this.snackBar.open(result.mensaje, '', {
             duration: 5000,
@@ -103,40 +109,43 @@ export class ArtiregisterComponent implements OnInit, OnDestroy {
       });
   }
 
-  // Método para abrir el diálogo para registrar un detalle de producto
+  // Método para abrir el diálogo de registro de detalles de producto
   onOpenModalDetalle(idProducto: number) {
     const dialogRef = this.dialog.open(ProductDetalleDialogComponent, {
       minWidth: '60%',
       data: {
         title: 'Registro del detalle de producto',
-        idProducto: idProducto // Pasar el idProducto como propiedad del objeto de datos
+        idProducto: idProducto
       }
     });
 
-    // Suscribirse al resultado del diálogo después de cerrarse
     dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
         if (result) {
-          this.listarDetalle();
+          // Mostrar mensaje de éxito en una snackbar
           this.snackBar.open(result.mensaje, '', {
             duration: 5000,
             panelClass: ['success-snackbar'],
             horizontalPosition: 'right',
             verticalPosition: 'top'
-          })
+          });
+
+          // Redirigir a la vista de detalles de producto después de guardar el detalle
+          this.router.navigate(['/articulos/detail'], { queryParams: { idProducto: idProducto } });
         }
       });
   }
 
-  // Método para desuscribirse y evitar pérdidas de memoria al destruir el componente
   ngOnDestroy(): void {
+    // Desuscribirse de todos los observables al destruir el componente
     this.destroy$.next({});
     this.destroy$.complete();
   }
 
   // Método para eliminar un producto por su ID
   onDelete(idProducto: number) {
+    // Mostrar un cuadro de diálogo de confirmación antes de eliminar
     Swal.fire({
       title: '',
       text: '¿Realmente desea eliminar el registro?',
@@ -148,18 +157,46 @@ export class ArtiregisterComponent implements OnInit, OnDestroy {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Llamar al método del servicio para eliminar el producto y mostrar un mensaje de éxito
+        // Llamar al servicio para eliminar el producto
         this.productoSvc.delete(idProducto).subscribe((res: DefaultResponse) => {
+          // Mostrar mensaje de éxito en una snackbar
           this.snackBar.open(res.mensaje, '', {
             duration: 5 * 1000,
             panelClass: ['success-snackbar'],
             horizontalPosition: 'end',
             verticalPosition: 'top'
           });
+
           // Actualizar la lista de productos después de eliminar
           this.listar();
         });
       }
     });
+  }
+
+  // Métodos para aplicar filtros en la tabla
+  onFilterNombre(value: string) {
+    this.filterNombre = value;
+    this.table.offset = 0;
+  }
+
+  onFilterCategoria(value: string) {
+    this.filterCategoria = value;
+    this.table.offset = 0;
+  }
+
+  onFilterFecha(value: string) {
+    this.filterFecha = value;
+    this.table.offset = 0;
+  }
+
+  onFilterResponsable(value: string) {
+    this.filterResponsable = value;
+    this.table.offset = 0;
+  }
+
+  // Método para navegar a la vista de detalles de producto
+  onGoToDetails(idProducto: number) {
+    this.router.navigate(['/articulos/detail'], { queryParams: { idProducto: idProducto } });
   }
 }

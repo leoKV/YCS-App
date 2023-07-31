@@ -17,24 +17,25 @@ import { DatePipe } from '@angular/common';
 
 // Importar el servicio SharedDataService
 import { SharedDataService } from './services/shared-data-service.service';
+import { AdminModule } from "../admin.module";
 
 @NgModule({
-  // Declarar los componentes utilizados en este módulo
-  declarations: [
-    ArtiregisterComponent,
-    ProductDialogComponent,
-    ProductDetalleDialogComponent
-  ],
-  // Importar los módulos necesarios para este módulo
-  imports: [
-    CommonModule,  // Módulo común de Angular
-    ArtiregisterRoutingModule,  // Módulo de enrutamiento específico para este módulo
-    MaterialModule,  // Módulo que contiene los componentes de Angular Material
-    ReactiveFormsModule  // Módulo para trabajar con formularios reactivos
-  ],
-  providers: [
-    SharedDataService, // Asegúrate de agregar el servicio en la lista de proveedores
-    DatePipe
-  ],
+    // Declarar los componentes utilizados en este módulo
+    declarations: [
+        ArtiregisterComponent,
+        ProductDialogComponent,
+        ProductDetalleDialogComponent,
+    ],
+    providers: [
+        SharedDataService,
+        DatePipe
+    ],
+    imports: [
+        CommonModule,
+        ArtiregisterRoutingModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        AdminModule,
+    ]
 })
 export class ArtiregisterModule { }

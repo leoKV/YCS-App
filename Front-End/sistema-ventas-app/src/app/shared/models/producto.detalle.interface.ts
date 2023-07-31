@@ -1,8 +1,8 @@
 export interface ProductoDetalleResponse {
-    idDetalleProducto: number;
-    talla: string;
-    color: string;
-    precioUnitario: number;
-    stock: number;
-    idProducto : number;
+  idDetalleProducto: number | null;
+  talla: string | null;
+  color: string | null;
+  precioUnitario: number | null;
+  stock: number | null;
+  idProducto: number | null;
 }
