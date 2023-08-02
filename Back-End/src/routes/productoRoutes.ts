@@ -25,7 +25,7 @@ class ProductoRoutes{
         //Insertar detalle del producto
         this.router.post("/detalle",insertDetailValidationRules(),[jwtCheck,validate],productoController.insertarDetalleProducto)
         //Insertar imagen del producto
-        this.router.post("/detalle/imagen",[jwtCheck,validate],productoController.insertarImagenProducto)
+        this.router.post("/detalle/imagen/:idDetalleProducto",[jwtCheck,validate],productoController.subirArchivos)
     
         //Actualizar producto
         this.router.put("/",updateValidationRules(),[jwtCheck,validate],productoController.actualizar)

@@ -133,6 +133,44 @@ class ProductoController {
             }
         });
     }
+    subirArchivos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { idDetalleProducto } = req.params;
+                const token = req.headers["auth"];
+                const data = utils_1.utils.getPayload(token);
+                const files = req.files;
+                if (files && files.imagenes && Array.isArray(files.imagenes)) {
+                    for (let file of files.imagenes) {
+                        file.mv(`./uploads/${idDetalleProducto}/${file.name}`);
+                        let data = {
+                            rutaImagen: file.name,
+                            idDetalleProducto
+                        };
+                        yield productoDatabase_1.default.insertarData(data);
+                    }
+                    return res.json({ mensaje: "Imágenes registradas correctamente" });
+                }
+                else if (files && files.imagenes) {
+                    let file = files.imagenes;
+                    file.mv(`./uploads/${idDetalleProducto}/${file.name}`);
+                    let data = {
+                        rutaImagen: file.name,
+                        idDetalleProducto
+                    };
+                    yield productoDatabase_1.default.insertarData(data);
+                    return res.json({ mensaje: "Imágenes registrados correctamente" });
+                }
+                else {
+                    return res.status(404).json({ mensaje: "Ocurrió un error al guardar las imágenes" });
+                }
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
     //Método para actualizar productos de la tabla tblProducto
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

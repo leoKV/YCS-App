@@ -54,6 +54,13 @@ class ProductoDatabase {
         return result;
     }
 
+    public async insertarData(data: any) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query(" INSERT INTO tblImagenProducto SET ? ", [data]);
+        });
+        return result;
+    }
+
     //Métodos para actualizar
     public async actualizar(producto: any, idProducto: number) {
         const result = await pool.then(async (connection) => {

@@ -31,7 +31,7 @@ const insertDetailValidationRules = () => {
         //.isLength({min:1,max:3}).withMessage("Rango Incorrecto").toUpperCase(),
         (0, express_validator_1.body)("color").trim().not().isEmpty().withMessage("Campo requerido")
             .isLength({ min: 3, max: 10 }).withMessage("Rango Incorrecto"),
-        (0, express_validator_1.body)("precioUnitario").trim().not().isEmpty().withMessage("Campo requerido")
+        (0, express_validator_1.body)("precioUnitario").trim().not().isEmpty().withMessage("Campo requerido").isFloat()
             .isNumeric().withMessage("Solo se admite un valor númerico"),
         (0, express_validator_1.body)("stock").trim().not().isEmpty().withMessage("Campo requerido")
             .isNumeric().withMessage("Solo se admite un valor númerico")
@@ -45,7 +45,7 @@ const updateDetailValidationRules = () => {
         //.isLength({min:1,max:3}).withMessage("Rango Incorrecto").toUpperCase(),
         (0, express_validator_1.body)("color").trim().not().isEmpty().withMessage("Campo requerido")
             .isLength({ min: 3, max: 10 }).withMessage("Rango Incorrecto"),
-        (0, express_validator_1.body)("precioUnitario").trim().not().isEmpty().withMessage("Campo requerido")
+        (0, express_validator_1.body)("precioUnitario").trim().not().isEmpty().withMessage("Campo requerido").isFloat()
             .isNumeric().withMessage("Solo se admite un valor númerico"),
         (0, express_validator_1.body)("stock").trim().not().isEmpty().withMessage("Campo requerido")
             .isNumeric().withMessage("Solo se admite un valor númerico")

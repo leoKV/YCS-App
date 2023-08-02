@@ -71,6 +71,14 @@ class ProductoDatabase {
             return result;
         });
     }
+    insertarData(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" INSERT INTO tblImagenProducto SET ? ", [data]);
+            }));
+            return result;
+        });
+    }
     //Métodos para actualizar
     actualizar(producto, idProducto) {
         return __awaiter(this, void 0, void 0, function* () {

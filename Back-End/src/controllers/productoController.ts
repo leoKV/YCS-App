@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { utils } from "../utils/utils";
 import daoP from "../database/productoDatabase";
+import fileUpload from "express-fileupload";
 class ProductoController {
     //Método para listar todos los productos de la tabla tblProducto
     public async listar(req: Request, res: Response) {
@@ -95,6 +96,47 @@ class ProductoController {
                 return res.status(505).json({ mensaje: "Ocurrió un error" });
             }
         } catch (error) {
+            console.error(error);
+            return res.status(500).json({ mensaje: "Ocurrió un error" });
+        }
+    }
+
+    public async subirArchivos(req: Request, res: Response) {
+        try {
+            const { idDetalleProducto } = req.params;
+            const token = <string>req.headers["auth"];
+            const data = utils.getPayload(token);
+
+            const files = req.files;
+
+            if (files && files.imagenes && Array.isArray(files.imagenes)) {
+                for (let file of files.imagenes) {
+                    file.mv(`./uploads/${idDetalleProducto}/${file.name}`);
+                    let data = {
+                        rutaImagen: file.name,
+                        idDetalleProducto
+                    }
+
+                    await daoP.insertarData(data);
+                }
+                return res.json({ mensaje: "Imágenes registradas correctamente" });
+            } else if (files && files.imagenes) {
+                let file = <fileUpload.UploadedFile>files.imagenes;
+                file.mv(`./uploads/${idDetalleProducto}/${file.name}`);
+
+                let data = {
+                    rutaImagen: file.name,
+                    idDetalleProducto
+                }
+
+                await daoP.insertarData(data);
+
+                return res.json({ mensaje: "Imágenes registrados correctamente" });
+            } else {
+                return res.status(404).json({ mensaje: "Ocurrió un error al guardar las imágenes" });
+
+            }
+        } catch (error: any) {
             console.error(error);
             return res.status(500).json({ mensaje: "Ocurrió un error" });
         }
