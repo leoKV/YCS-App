@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import indexRoutes from "./routes/indexRoutes";
 import authRoutes from "./routes/authRoutes";
+import usuarioRoutes from "./routes/usuarioRoutes";
 
 class Server{
 
@@ -47,6 +48,7 @@ class Server{
     private routes():void{
         this.app.use("/",indexRoutes);
         this.app.use("/api/auth",authRoutes);
+        this.app.use("/api/usuario",usuarioRoutes);
     }
 
     /***************************************************

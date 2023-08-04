@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+ 
+    <ng-container *ngIf="isLogged">
+        <button mat-icon-button (click)="onToggleSidenav();">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </ng-container>
+
+
+    <span> <a routerLink="/home">Your Clothing Shop</a> </span>
+    <span class="spacer"></span>
+    <form class="d-flex" role="search" style="padding-right: 2%;">
+        <input class="form-control me-2" type="search" placeholder="Buscar Prenda" aria-label="Search">
+        <button class="btn btn-success" type="submit">Buscar</button>
+      </form>
+    <div>
+        <!--         <button mat-button (click)="isLogged= !isLogged">Test</button>  -->
+        <span class="spacer"></span>
+        <div *ngIf="!isLogged else viewLogout">
+            <a mat-button routerLink="/login">Iniciar Sesión</a>
+            <a mat-button routerLink="/register">Registrarse</a>
+        </div>
+    </div>
+</mat-toolbar>
+
+<ng-template #viewLogout>
+    <button mat-button>{{ data?.nombre+ ' '+ data?.apellidoPaterno }}</button>
+    <button mat-icon-button (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+</ng-template>
