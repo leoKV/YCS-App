@@ -43,7 +43,7 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="actionTODO =='new'" class="full-width mb-3"
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width mb-3"
             appearance="outline">
             <mat-label>Contraseña</mat-label>
             <input [type]="hidePwd ? 'password' :'text'"
@@ -57,7 +57,7 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="actionTODO =='new'" class="full-width mb-3"
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width mb-3"
             appearance="outline">
             <mat-label>Confirmar Contraseña</mat-label>
             <input [type]="hideConfirmPwd ? 'password' :'text'"

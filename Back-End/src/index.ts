@@ -24,7 +24,7 @@ class Server{
      ***************************************************/
     private config(): void{
         // Realizar la configuración del puerto(host || local)
-        this.app.set("port",3000);
+        this.app.set("port",5000);
 
         // Mostrar las peticiones en la terminal (morgan)
         // process.env_NODE_ENV =1, production, 2.development

@@ -58,17 +58,29 @@ export class UserDialogComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
+
     if (this.userForm.invalid) return;
 
     var data = this.userForm.value;
-    const { confirmContrasenia, idUsuario, ...user } = data;
 
-    this.userSvc.new(user).pipe(takeUntil(this.destroy$)).subscribe(result => {
-      if (result) {
-        this.dialogRef.close(result);
-      }
-    });
+    if(this.actionTODO == Action.NEW){
+      const { confirmContrasenia, idUsuario, ...user } = data;
 
+      this.userSvc.new(user).pipe(takeUntil(this.destroy$)).subscribe(result => {
+        if (result) {
+          this.dialogRef.close(result);
+        }
+      });
+    }else if(this.actionTODO == Action.EDIT){
+      const { contrasenia, confirmContrasenia, ...user } = data;
+
+      this.userSvc.update(user).pipe(takeUntil(this.destroy$)).subscribe(result => {
+        if (result) {
+          this.dialogRef.close(result);
+        }
+      });
+    }
+  
   }
 
   onClear() {
@@ -93,6 +105,9 @@ export class UserDialogComponent implements OnInit, OnDestroy {
         telefono: this.data.user?.telefono,
         roles: this.data.user?.roles
       });
+
+      this.userForm.get("contrasenia")?.setValidators(null);
+      this.userForm.get("confirmContrasenia")?.setValidators(null);
       this.userForm.updateValueAndValidity();
     }
   }
