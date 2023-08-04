@@ -32,7 +32,8 @@
             "styles": [
               "src/assets/styles/light-style.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
