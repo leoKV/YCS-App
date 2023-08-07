@@ -23,6 +23,15 @@ export class ProductoDetalleService {
       );
   }
 
+    // Obtener los detalles de los productos
+    getDetalleProductos(): Observable<any> {
+      return this.http.get<any>(`${environment.API_URL}/producto/detalle`, { headers: { "requireToken": "true" } })
+        .pipe(
+          tap(response => console.log("Detalles de producto recibidos:", response)), // Se muestra la respuesta del servidor en la consola
+          catchError((error) => this.handlerError(error)) // Captura y manejo de errores
+        );
+    }
+
   // Actualizar los detalles de un producto
   updateDetalle(productoDetalle: ProductoDetalleResponse): Observable<any> {
     return this.http.put<any>(`${environment.API_URL}/producto/detalle`, productoDetalle, { headers: { "requireToken": "true" } })
