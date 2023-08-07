@@ -15,6 +15,10 @@ class ProductoRoutes{
     private config(){
         //Listar producto
         this.router.get("/",[jwtCheck],productoController.listar)
+        //Listar detalles de productos
+        this.router.get("/detalle",[jwtCheck],productoController.listarDetalleByProduct)
+         //Listar producto por el id
+         this.router.get("/:idProducto", [jwtCheck], productoController.listarByProductId)
         //Listar detalle del producto por el id
         this.router.get("/detalle/:idProducto", [jwtCheck], productoController.listarDetalleByProductId)
         //Listar imagen del producto por el id del detalle

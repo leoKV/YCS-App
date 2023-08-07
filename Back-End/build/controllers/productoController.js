@@ -41,12 +41,39 @@ class ProductoController {
         });
     }
     //Método para listar del detalle de un producto en base a su id de producto
+    listarByProductId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
+                var producto = yield productoDatabase_1.default.listarByProductId(idProducto);
+                return res.json(producto);
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
+    //Método para listar del detalle de un producto en base a su id de producto
     listarDetalleByProductId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
                 var detalleProducto = yield productoDatabase_1.default.listarDetalleByProductId(idProducto);
                 return res.json(detalleProducto);
+            }
+            catch (error) {
+                console.error(error);
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
+    //Método para listar todos los detalles de productos de la tabla tblDetalleProducto
+    listarDetalleByProduct(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var productos = yield productoDatabase_1.default.listarDetalleByProduct();
+                return res.json(productos);
             }
             catch (error) {
                 console.error(error);
