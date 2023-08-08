@@ -133,7 +133,7 @@ class ProductoController {
 
                 return res.json({ mensaje: "Imágenes registrados correctamente" });
             } else {
-                return res.status(404).json({ mensaje: "Ocurrió un error al guardar las imágenes" });
+                return res.status(500).json({ mensaje: "Ocurrió un error al guardar las imágenes" });
 
             }
         } catch (error: any) {
