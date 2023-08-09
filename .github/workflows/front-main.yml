@@ -4,12 +4,12 @@ name: CI/CD Frontend
 on: 
   push:
     branches: [main]
-    paths:
-      - 'YCS-App/Front-End/sistema-ventas-app/**'
+#     paths:
+#       - 'YCS-App/Front-End/sistema-ventas-app/**'
   pull_request:
     branches: [main]
-    paths: 
-      - 'YCS-App/Front-End/sistema-ventas-app/**'
+#     paths: 
+#       - 'YCS-App/Front-End/sistema-ventas-app/**'
       
       
 #if: github.event_name=='pull_request'&&github.event.acction=='close'&&github.event.pull_request.merge==true
