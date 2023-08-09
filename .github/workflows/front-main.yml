@@ -48,7 +48,7 @@ jobs:
           password: ${{secrets.PASSWORD}}
           protocol: ftps
           port: 21
-          local-dir: ./Front-End/sistema-ventas-app/
+          local-dir: ./Front-End/sistema-ventas-app/dist/sistema-ventas-app/
           server-dir: ./html/
           log-level: standard
           
