@@ -5,11 +5,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'sistema-ventas-app/**'
+      - 'YSC-App/**'
   pull_request:
     branches: [main]
     paths: 
-      - 'sistema-venta-app/**'
+      - 'YSC-App/**'
       
       
 #if: github.event_name=='pull_request'&&github.event.acction=='close'&&github.event.pull_request.merge==true
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: 
       run: 
-        working-directory: ./sistema-ventas-app
+        working-directory: ./YSC-App
         
     steps:
       - uses: actions/checkout@v3  
@@ -48,7 +48,7 @@ jobs:
           password: ${{secrets.PASSWORD}}
           protocol: ftps
           port: 21
-          local-dir: ./sistema-ventas-app/dist/sistema-ventas-app/
+          local-dir: ./YSC-App/dist/YSC-App/
           server-dir: ./html/
           log-level: standard
           
