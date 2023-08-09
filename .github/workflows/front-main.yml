@@ -39,7 +39,7 @@ jobs:
       - name: Run Build Command
         run: npm run build
       - name: Deploy Frontend
-        uses: SamKirland/FTP-Deploy-Action@4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         if:
           github.event.ref== 'refs/heads/main'
         with:
