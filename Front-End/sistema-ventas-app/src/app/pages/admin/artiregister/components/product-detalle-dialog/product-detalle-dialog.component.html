@@ -25,7 +25,7 @@
     <!-- Campo "Color" con un campo de entrada de texto -->
     <mat-form-field class="full-width mb-3" appearance="outline">
       <mat-label>Color</mat-label>
-      <input type="text" formControlName="color" matInput />
+      <input type="color" formControlName="color" matInput />
       <mat-error>
         {{ baseForm.getErrorMessage(productoDetalleForm.get('color')) }}
       </mat-error>

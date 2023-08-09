@@ -145,10 +145,12 @@ export class ArtidetailsComponent implements OnInit, OnDestroy {
 
   // Método para abrir el diálogo de carga de imágenes asociadas al detalle de producto
   onOpenModalImagenes(detalle: ProductoDetalleResponse) {
+    console.log(detalle);
+    // ImageUploadComponent.id
     const dialogRef = this.dialog.open(ImageUploadComponent, {
       minWidth: '60%',
       data: {
-        detalle: detalle
+        idDetalleProducto: detalle.idDetalleProducto
       }
     });
 

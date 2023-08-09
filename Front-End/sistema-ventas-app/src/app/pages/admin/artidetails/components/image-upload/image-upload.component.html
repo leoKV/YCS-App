@@ -1,8 +1,8 @@
 <!-- Encabezado del formulario -->
-<h2>Agregar imágenes para el detalle de producto</h2>
+<h2 style="padding: 2%;">Agregar imágenes para el detalle de producto</h2>
 
 <!-- Contenedor para arrastrar y soltar imágenes -->
-<div class="drop-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+<div class="drop-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" style="padding: 5%;">
 
   <!-- Vista previa de las imágenes cargadas -->
   <div *ngIf="imagenes.length > 0" class="image-preview">
@@ -12,16 +12,18 @@
     </div>
   </div>
 
+  <div style="border: solid black 2px;">
   <!-- Mensajes para el proceso de arrastrar y soltar imágenes -->
   <p *ngIf="dragging">Suelta las imágenes aquí</p> <!-- Se muestra cuando se está arrastrando una imagen encima del contenedor -->
-  <p *ngIf="!dragging">Arrastra aquí las imágenes o haz clic para seleccionarlas.</p> <!-- Se muestra cuando no hay imágenes en el contenedor -->
-
+  <p *ngIf="!dragging" style="padding: 5%;" >Arrastra aquí las imágenes</p> <!-- Se muestra cuando no hay imágenes en el contenedor -->
+  </div>
   <!-- Input para seleccionar archivos de imagen -->
   <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput hidden>
 </div>
 
+<div style="padding: 2%;">
 <!-- Botón para guardar las imágenes -->
-<button class="btn btn-primary" (click)="guardarImagenes()" [disabled]="imagenes.length === 0">Guardar imágenes</button>
-
+<button class="btn btn-success" (click)="guardarImagenes()" [disabled]="imagenes.length === 0">Guardar imágenes</button>
 <!-- Botón para abrir el diálogo de selección de imágenes -->
-<button class="btn btn-secondary" (click)="fileInput.click()">Seleccionar imágenes</button>
+<button class="btn btn-info" (click)="fileInput.click()">Seleccionar imágenes</button>
+</div>

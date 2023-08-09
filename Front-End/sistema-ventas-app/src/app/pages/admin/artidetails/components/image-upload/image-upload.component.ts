@@ -1,22 +1,38 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductoDetalleResponse } from '../../../../../shared/models/producto.detalle.interface';
+import { ProductoDetalleService } from '../../services/producto-detalle.service';
+import { Imagen } from '../../../../../shared/models/imagen.interface';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss']
 })
-export class ImageUploadComponent implements OnInit {
+export class ImageUploadComponent implements OnInit, OnDestroy {
   imagenes: File[] = []; // Arreglo que almacena las imágenes cargadas
   dragging = false; // Bandera para indicar si se está arrastrando una imagen
+  sub1: Subscription = Subscription.EMPTY;
+  @Input()
+  idDetalleProducto=0;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public detalle: ProductoDetalleResponse | null, // Datos del detalle del producto que se pasan al abrir el diálogo
-    private dialogRef: MatDialogRef<ImageUploadComponent> // Referencia al diálogo actual
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: ProductoDetalleResponse | null, // Datos del detalle del producto que se pasan al abrir el diálogo
+    private dialogRef: MatDialogRef<ImageUploadComponent>,
+    private productoService: ProductoDetalleService // Referencia al diálogo actual
+  ) { 
+    if (this.data && this.data.idDetalleProducto) {
+      this.idDetalleProducto = this.data.idDetalleProducto;
+    }
+  }
+
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.sub1 && this.sub1.unsubscribe();
   }
 
   // Evento que se dispara al soltar una imagen sobre el área de carga
@@ -64,7 +80,16 @@ export class ImageUploadComponent implements OnInit {
   // Método para guardar las imágenes en el servidor (lógica de ejemplo)
   guardarImagenes() {
     // Aquí se implementa la lógica para guardar las imágenes en el servidor
-
+    this.sub1 = this.productoService
+    .insertarImagenes({
+      idDetalleProducto: this.idDetalleProducto,
+      imagenes: this.imagenes
+    }).subscribe({
+      next: (response) => {
+        console.log(response);
+      }, 
+      error:  (e) => {console.error(e)}}
+    );
     // Cerrar el modal con el mensaje de éxito
     this.dialogRef.close({ mensaje: 'Imágenes guardadas correctamente' });
   }

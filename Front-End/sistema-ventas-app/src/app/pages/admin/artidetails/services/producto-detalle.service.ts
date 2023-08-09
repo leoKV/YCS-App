@@ -45,9 +45,17 @@ export class ProductoDetalleService {
   }
 
   // Insertar imágenes asociadas a un detalle de producto
-  insertarImagenes(imagenes: Imagen[]): Observable<any> {
-    const url = `${environment.API_URL}/producto/detalle/imagen`;
-    return this.http.post(url, imagenes, { headers: { "requireToken": "true" } });
+  insertarImagenes(archivos: any): Observable<any> {
+    let {idDetalleProducto, imagenes} = archivos;
+
+    let formData = new FormData();
+    formData.append('idDetalleProducto', idDetalleProducto);
+    imagenes.map((image: File) => {
+      formData.append('imagenes', image);
+    });
+    const url = `${environment.API_URL}/producto/detalle/imagen/${idDetalleProducto}`;
+
+    return this.http.post(url, formData, { headers: { "requireToken": "true" } });
   }
 
   // Eliminar una imagen asociada a un detalle de producto por su ID
