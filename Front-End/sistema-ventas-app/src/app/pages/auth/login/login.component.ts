@@ -22,17 +22,10 @@ export class LoginComponent implements OnInit {
   onLogin(){
     //Validar que el formulario es correcto
     if(this.loginForm.invalid) return;
-  
-
     //Obtener información del formulario y se almacenará en la variable 'form'
     const form=this.loginForm.value;
-    this.authSvc.login(form).subscribe( (data:AuthResponse | void)=>{
-      
+    this.authSvc.login(form).subscribe( (data:AuthResponse | void)=>{ 
+     
     });
-
-
-
-
-    console.log("OnLogin Method", form);
   }
 }

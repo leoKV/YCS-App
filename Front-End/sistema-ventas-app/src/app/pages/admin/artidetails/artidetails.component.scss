@@ -1,0 +1,26 @@
+.cuerpo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  background-image: url("/src/assets/images/LogoMCS.png");
+  background-size: cover;
+}
+
+.centered-container {
+  text-align: left;
+  width: 50%;
+}
+
+/* Estilos para la tabla */
+.bodymain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+/* Estilos para los botones */
+.btn {
+  margin-right: 5px;
+}

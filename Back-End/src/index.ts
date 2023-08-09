@@ -4,6 +4,9 @@ import cors from "cors";
 import indexRoutes from "./routes/indexRoutes";
 import authRoutes from "./routes/authRoutes";
 import usuarioRoutes from "./routes/usuarioRoutes";
+import generalRoutes from "./routes/generalRoutes";
+import productoRoutes from "./routes/productoRoutes";
+import fileUpload from "express-fileupload";
 
 class Server{
 
@@ -23,6 +26,15 @@ class Server{
     private config(): void{
         // Realizar la configuración del puerto(host || local)
         this.app.set("port",3000);
+
+        this.app.use(fileUpload({
+            createParentPath: true,
+            limits: {
+                fileSize: 2 * 1024 * 1024 * 1024 //Limit 2MB file 
+            }
+        }));
+
+        this.app.use(express.static('uploads'));
 
         // Mostrar las peticiones en la terminal (morgan)
         // process.env_NODE_ENV =1, production, 2.development
@@ -49,6 +61,8 @@ class Server{
         this.app.use("/",indexRoutes);
         this.app.use("/api/auth",authRoutes);
         this.app.use("/api/usuario",usuarioRoutes);
+        this.app.use("/api/general",generalRoutes);
+        this.app.use("/api/producto",productoRoutes)
     }
 
     /***************************************************
