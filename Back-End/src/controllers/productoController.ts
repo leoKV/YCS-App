@@ -15,12 +15,36 @@ class ProductoController {
     }
 
     //Método para listar del detalle de un producto en base a su id de producto
+    public async listarByProductId(req: Request, res: Response) {
+        try {
+            var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
+
+            var producto = await daoP.listarByProductId(idProducto);
+            return res.json(producto);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ mensaje: "Ocurrió un error" });
+        }
+    }
+
+    //Método para listar del detalle de un producto en base a su id de producto
     public async listarDetalleByProductId(req: Request, res: Response) {
         try {
             var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
 
             var detalleProducto = await daoP.listarDetalleByProductId(idProducto);
             return res.json(detalleProducto);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ mensaje: "Ocurrió un error" });
+        }
+    }
+
+    //Método para listar todos los detalles de productos de la tabla tblDetalleProducto
+    public async listarDetalleByProduct(req: Request, res: Response) {
+        try {
+            var productos = await daoP.listarDetalleByProduct();
+            return res.json(productos);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ mensaje: "Ocurrió un error" });

@@ -26,10 +26,16 @@ export class ProductoService {
       .pipe(catchError((error) => this.handlerError(error)));
   }
 
+  // Método para obtener un producto desde la API
+  getProducto(idProducto: number) {
+    return this.http.get<any>(`${environment.API_URL}/producto/${idProducto}`, { headers: { "requireToken": "true" } })
+      .pipe(catchError((error) => this.handlerError(error)));
+  }
+
   // Método para obtener la lista de detalles de productos desde la API
   getDetalleProducto(idProducto: number) {
     return this.http.get<any>(`${environment.API_URL}/producto/detalle/${idProducto}`, { headers: { "requireToken": "true" } })
-      .pipe(tap(response => console.log("Detalles de producto recibidos:", response)), catchError((error) => this.handlerError(error)));
+      .pipe(catchError((error) => this.handlerError(error)));
   }
 
   // Método para crear un nuevo producto en la API

@@ -30,10 +30,32 @@ class ProductoDatabase {
             return result;
         });
     }
+    listarByProductId(idProducto) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(`
+            SELECT p.*, c.nombre AS nombreCategoria,
+            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario
+            FROM tblProducto p
+            INNER JOIN tblCategoria c ON p.idCategoria = c.idCategoria
+            INNER JOIN tblUsuario u ON p.idRegistro = u.idUsuario
+        `, [idProducto]);
+            }));
+            return result;
+        });
+    }
     listarDetalleByProductId(idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 return yield connection.query(" SELECT * FROM tblDetalleProducto WHERE idProducto =? ", [idProducto]);
+            }));
+            return result;
+        });
+    }
+    listarDetalleByProduct() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" SELECT * FROM tblDetalleProducto ");
             }));
             return result;
         });

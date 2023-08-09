@@ -18,9 +18,29 @@ class ProductoDatabase {
         return result;
     }
 
+    public async listarByProductId(idProducto: number) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query(`
+            SELECT p.*, c.nombre AS nombreCategoria,
+            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario
+            FROM tblProducto p
+            INNER JOIN tblCategoria c ON p.idCategoria = c.idCategoria
+            INNER JOIN tblUsuario u ON p.idRegistro = u.idUsuario
+        `, [idProducto]);
+        });
+        return result;
+    }
+
     public async listarDetalleByProductId(idProducto: number) {
         const result = await pool.then(async (connection) => {
             return await connection.query(" SELECT * FROM tblDetalleProducto WHERE idProducto =? ", [idProducto]);
+        });
+        return result;
+    }
+
+    public async listarDetalleByProduct() {
+        const result = await pool.then(async (connection) => {
+            return await connection.query(" SELECT * FROM tblDetalleProducto ");
         });
         return result;
     }
