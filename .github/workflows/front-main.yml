@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: 
       run: 
-        working-directory: ./YCS-App/Front-End/sistema-ventas-app/
+        working-directory: ./Front-End/sistema-ventas-app/
         
     steps:
       - uses: actions/checkout@v3  
@@ -48,7 +48,7 @@ jobs:
           password: ${{secrets.PASSWORD}}
           protocol: ftps
           port: 21
-          local-dir: ./YCS-App/Front-End/sistema-ventas-app/
+          local-dir: ./Front-End/sistema-ventas-app/
           server-dir: ./html/
           log-level: standard
           
