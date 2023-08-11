@@ -1,0 +1,44 @@
+name: CI/CD Backend
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+    
+jobs:
+  sistema-ventas-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: ./sistema-ventas-api
+        
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+    # Cache Node Modules
+      - name: Cache node modules
+        id: node-cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          
+    # Despliegue de la aplicación
+      - name: Deploy Backend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        if: github.event.ref == 'refs/heads/main'
+        with:
+          server: ${{ secrets.URL_API }}
+          username: ${{ secrets.USERNAME_API }}
+          password: ${{ secrets.PASSWORD_API }}
+          protocol: ftps
+          port: 21
+          local-dir: ./sistema-ventas-api/build/
+          server-dir: ./files/
+          log-level: standard
+    
