@@ -18,7 +18,7 @@ class UsuarioRoutes {
         //Actualizar
         //this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
-        this.router.delete("/:idUsuario", usuarioController_1.usuarioController.eliminar);
+        //this.router.delete("/:idUsuario",usuarioController.eliminar);
     }
 }
 const usuario = new UsuarioRoutes();
