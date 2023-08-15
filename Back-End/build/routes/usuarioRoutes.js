@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const usuarioController_1 = require("../controllers/usuarioController");
-const validatorCheck_1 = require("../middlewares/validatorCheck");
 const jwtCheck_1 = require("../middlewares/jwtCheck");
 class UsuarioRoutes {
     constructor() {
@@ -13,7 +12,7 @@ class UsuarioRoutes {
         //Listar
         this.router.get("/", [jwtCheck_1.jwtCheck], usuarioController_1.usuarioController.listar);
         //Insertar
-        this.router.post("/", [jwtCheck_1.jwtCheck, validatorCheck_1.validate], usuarioController_1.usuarioController.insertar);
+        //this.router.post("/",[ jwtCheck,validate ],usuarioController.insertar);
         //Actualizar
         // this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
