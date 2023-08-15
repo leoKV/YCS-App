@@ -8,7 +8,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
-// import usuarioRoutes from "./routes/usuarioRoutes";
+const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const generalRoutes_1 = __importDefault(require("./routes/generalRoutes"));
 const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
@@ -54,7 +54,7 @@ class Server {
     routes() {
         this.app.use("/", indexRoutes_1.default);
         this.app.use("/api/auth", authRoutes_1.default);
-        // this.app.use("/api/usuario",usuarioRoutes);
+        this.app.use("/api/usuario", usuarioRoutes_1.default);
         this.app.use("/api/general", generalRoutes_1.default);
         this.app.use("/api/producto", productoRoutes_1.default);
     }
