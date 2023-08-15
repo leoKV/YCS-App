@@ -4,8 +4,8 @@ export const insertValidationRules = () => {
     return[
         body("nombre").trim().not().isEmpty().withMessage("Campo requerido")
           .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
-    //     body("apellidoPaterno").trim().not().isEmpty().withMessage("Campo requerido")
-    //     .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
+        body("apellidoPaterno").trim().not().isEmpty().withMessage("Campo requerido")
+          .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
     //     body("apellidoMaterno").trim().not().isEmpty().withMessage("Campo requerido")
     //     .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
     //     body("contrasenia").trim().not().isEmpty().custom(value => !/\s/.test(value)).withMessage("Campo requerido")
