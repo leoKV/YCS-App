@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run: 
-        working-directory: ./sistema-ventas-api
+        working-directory: ./Back-End
         
     steps:
       - uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.PASSWORD_API }}
           protocol: ftps
           port: 21
-          local-dir: ./sistema-ventas-api/build/
+          local-dir: ./Back-End/build/
           server-dir: ./files/
           log-level: standard
     
