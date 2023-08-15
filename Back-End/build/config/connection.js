@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     database: {
-        host: '127.0.0.1',
-        port: 3306,
-        user: 'admin',
-        password: 'admin',
+        host: 'db-mysql-sfo3-98336-do-user-14490683-0.b.db.ondigitalocean.com',
+        port: 25060,
+        user: 'doadmin',
+        password: 'AVNS_o3OnNnqS4r5BLhFoCkx',
         database: 'BD_YCS'
     }
 };
