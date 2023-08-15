@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { usuarioController } from "../controllers/usuarioController";
-// import { insertValidationRules, updateValidationRules } from "../validators/UsuarioValidatorRules";
-// import { validate } from "../middlewares/validatorCheck";
+import { insertValidationRules, updateValidationRules } from "../validators/UsuarioValidatorRules";
+import { validate } from "../middlewares/validatorCheck";
 import { jwtCheck } from "../middlewares/jwtCheck";
 
 class UsuarioRoutes{
