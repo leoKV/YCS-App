@@ -16,9 +16,9 @@ class UsuarioRoutes {
         //Insertar
         this.router.post("/", (0, UsuarioValidatorRules_1.insertValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], usuarioController_1.usuarioController.insertar);
         //Actualizar
-        this.router.put("/", (0, UsuarioValidatorRules_1.updateValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], usuarioController_1.usuarioController.actualizar);
+        //this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
-        // this.router.delete("/:idUsuario",usuarioController.eliminar);
+        this.router.delete("/:idUsuario", usuarioController_1.usuarioController.eliminar);
     }
 }
 const usuario = new UsuarioRoutes();
