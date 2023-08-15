@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const usuarioController_1 = require("../controllers/usuarioController");
-// import { insertValidationRules, updateValidationRules } from "../validators/UsuarioValidatorRules";
-// import { validate } from "../middlewares/validatorCheck";
 const jwtCheck_1 = require("../middlewares/jwtCheck");
 class UsuarioRoutes {
     constructor() {
