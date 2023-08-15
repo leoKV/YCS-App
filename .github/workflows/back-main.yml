@@ -33,9 +33,9 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         if: github.event.ref == 'refs/heads/main'
         with:
-          server: ${{ secrets.URL_API }}
-          username: ${{ secrets.USERNAME_API }}
-          password: ${{ secrets.PASSWORD_API }}
+          server: 161.35.227.182
+          username: api
+          password: admin123
           protocol: ftps
           port: 21
           local-dir: ./Back-End/build/
