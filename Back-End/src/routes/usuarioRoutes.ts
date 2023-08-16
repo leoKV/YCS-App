@@ -16,11 +16,11 @@ class UsuarioRoutes{
         //Listar
         this.router.get("/",[ jwtCheck ],usuarioController.listar);
         //Insertar
-        this.router.post("/",[ jwtCheck,validate ],usuarioController.insertar);
+        this.router.post("/",insertValidationRules(),[ jwtCheck,validate ],usuarioController.insertar);
         //Actualizar
-        this.router.put("/",[ jwtCheck,validate ],usuarioController.actualizar);
+        this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
-         //this.router.delete("/:idUsuario",usuarioController.eliminar);
+        this.router.delete("/:idUsuario",usuarioController.eliminar);
     }
 }
 const usuario = new UsuarioRoutes();
