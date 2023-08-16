@@ -8,8 +8,8 @@ export const insertValidationRules = () => {
           .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
         body("apellidoMaterno").trim().not().isEmpty().withMessage("Campo requerido")
           .isLength({min:3,max:50}).withMessage("Rango Incorrecto"),
-    //     body("contrasenia").trim().not().isEmpty().custom(value => !/\s/.test(value)).withMessage("Campo requerido")
-    //     .isLength({min:8,max:100}).withMessage("Rango Incorrecto"),
+        body("contrasenia").trim().not().isEmpty().custom(value => !/\s/.test(value)).withMessage("Campo requerido")
+          .isLength({min:8,max:100}).withMessage("Rango Incorrecto"),
     //     body("email").trim().not().isEmpty().withMessage("Campo requerido")
     //     .isLength({min:10,max:50}).withMessage("Rango Incorrecto")
     //     .isEmail().withMessage("Formato Incorrecto"),
