@@ -10,6 +10,7 @@ class GeneralController {
 
         } catch (error) {
             return res.status(500).json({ mensaje: "Ocurrió un error" });
+            
         }
     }
 

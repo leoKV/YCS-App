@@ -18,7 +18,7 @@ class GeneralDatabase {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 return yield connection.query(" SELECT idRol, nombre, clave"
-                    + " FROM tblrol WHERE estatus=? ", [true]);
+                    + " FROM tblRol WHERE estatus=? ", [true]);
             }));
             return result;
         });
