@@ -1,27 +1,42 @@
 <mat-card class="small-card">
-    <div class="cuerpo">
-      <div class="imglogo">
-        <img src="assets\images\LogoMCS.png" alt="" style="height: 300px;">
-      </div>
-        <div class="centered-container">
-          <mat-card class="card">
-            <mat-card-content>
-                <h1>Registro de Nueva Categoria</h1>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="width: 100%;">
-                  <input matInput type="text">
-                  <mat-label>Nombre</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="text">
-                  <mat-label>Descripción</mat-label>
-                </mat-form-field>
-              </div>
-              <button mat-button color="primary">Registrar Nueva Categoria</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+  <div class="cuerpo">
+    <div class="imglogo">
+      <img src="assets\images\LogoMCS.png" alt="" style="height: 300px;">
+    </div>
+    <div class="centered-container">
+      <mat-card class="card">
+        <mat-card-content>
+          <h1>Registro de Nueva Categoria</h1>
+          <form [formGroup]="nuevaCategoriaForm">
+            <mat-form-field class="inputs" style="width: 100%;">
+              <input matInput type="text" formControlName="nombre">
+              <mat-label>Nombre</mat-label>
+              <!-- Mostrar mensajes de error -->
+              <mat-error *ngIf="nuevaCategoriaForm.get('nombre')?.invalid && nuevaCategoriaForm.get('nombre')?.touched">
+                <span *ngIf="nuevaCategoriaForm.get('nombre')?.hasError('required')">Campo requerido.</span>
+                <span *ngIf="nuevaCategoriaForm.get('nombre')?.hasError('minlength')">Mínimo 10 caracteres.</span>
+                <span *ngIf="nuevaCategoriaForm.get('nombre')?.hasError('maxlength')">Máximo 50 caracteres.</span>
+                <span *ngIf="nuevaCategoriaForm.get('nombre')?.hasError('pattern')">Alfanumérico.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
+              <input matInput type="text" formControlName="descripcion">
+              <mat-label>Descripción</mat-label>
+              <!-- Mostrar mensajes de error -->
+              <mat-error *ngIf="nuevaCategoriaForm.get('descripcion')?.invalid && nuevaCategoriaForm.get('descripcion')?.touched">
+                <span *ngIf="nuevaCategoriaForm.get('descripcion')?.hasError('required')">Campo requerido.</span>
+                <span *ngIf="nuevaCategoriaForm.get('descripcion')?.hasError('minlength')">Mínimo 10 caracteres.</span>
+                <span *ngIf="nuevaCategoriaForm.get('descripcion')?.hasError('maxlength')">Máximo 100 caracteres.</span>
+                <span *ngIf="nuevaCategoriaForm.get('descripcion')?.hasError('pattern')">Alfanumérico.</span>
+              </mat-error>
+            </mat-form-field>
+          </form>
+          <!-- Desactivar el botón si el formulario es inválido -->
+          <button mat-button color="primary" (click)="registrarCategoria()" [disabled]="nuevaCategoriaForm.invalid">
+            Registrar Nueva Categoria
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </mat-card>
