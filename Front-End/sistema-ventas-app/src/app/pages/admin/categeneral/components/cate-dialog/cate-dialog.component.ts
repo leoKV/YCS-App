@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoriasService } from '../../../services/categorias.service';
 import { BaseForm } from '../../../../../shared/utils/base-form';
 import { Subject, takeUntil } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 enum Action {
   NEW = 'new',
@@ -17,7 +18,7 @@ enum Action {
 })
 export class CateDialogComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
-  
+
   actionTODO = Action.NEW;
   titleButton = "Guardar";
   hidePwd = true;
@@ -26,13 +27,14 @@ export class CateDialogComponent implements OnInit, OnDestroy {
   cateForm: FormGroup;
 
   isEdit = false;
-  index: number =0;
+  index: number = 0;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { title: string, categoria: any },
     public dialogRef: MatDialogRef<CateDialogComponent>,
     private formBuilder: FormBuilder,
     public baseForm: BaseForm,
+    private snackBar: MatSnackBar,
     private categoriasService: CategoriasService
   ) {
     this.cateForm = this.formBuilder.group({
@@ -69,6 +71,12 @@ export class CateDialogComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
+    if (this.cateForm.invalid) {
+      // Mostrar mensajes de error usando MatSnackBar
+      this.showSnackbarErrors();
+      return;
+    }
+
     if (this.cateForm.valid) {
       const nuevaCategoria = {
         idCategoria: this.isEdit ? this.index : null,
@@ -104,5 +112,21 @@ export class CateDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next({});
     this.destroy$.complete();
+  }
+
+  showSnackbarErrors() {
+    if (this.cateForm?.get('nombre')?.invalid) {
+      this.snackBar.open('El nombre es requerido y debe tener entre 10 y 50 caracteres', 'Cerrar', {
+        duration: 5000,
+        panelClass: 'error-snackbar'
+      });
+    }
+
+    if (this.cateForm?.get('descripcion')?.invalid) {
+      this.snackBar.open('La descripción es requerida y debe tener entre 10 y 100 caracteres', 'Cerrar', {
+        duration: 5000,
+        panelClass: 'error-snackbar'
+      });
+    }
   }
 }
