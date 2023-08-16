@@ -11,6 +11,8 @@ const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const generalRoutes_1 = __importDefault(require("./routes/generalRoutes"));
 const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
+const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -26,6 +28,13 @@ class Server {
     config() {
         // Realizar la configuración del puerto(host || local)
         this.app.set("port", 3000);
+        this.app.use((0, express_fileupload_1.default)({
+            createParentPath: true,
+            limits: {
+                fileSize: 2 * 1024 * 1024 * 1024 //Limit 2MB file 
+            }
+        }));
+        this.app.use(express_1.default.static('uploads'));
         // Mostrar las peticiones en la terminal (morgan)
         // process.env_NODE_ENV =1, production, 2.development
         var env = process.env.NODE_ENV || "development";
@@ -49,6 +58,7 @@ class Server {
         this.app.use("/api/usuario", usuarioRoutes_1.default);
         this.app.use("/api/cliente", clienteRoutes_1.default);
         this.app.use("/api/general", generalRoutes_1.default);
+        this.app.use("/api/producto", productoRoutes_1.default);
     }
     /***************************************************
      * @name start

@@ -27,11 +27,12 @@ exports.usuarioController = void 0;
 const usuarioDatabase_1 = __importDefault(require("../database/usuarioDatabase"));
 const utils_1 = require("../utils/utils");
 /**
- * @name
- * @author
- * @creation
+ * @name usuarioController
+ * @author Kevin Leonel Valdez Sánchez
+ * @creation 10-07-2023
  */
 class UsuarioController {
+    //Método para listar todos los usuarios de la tabal tblUsuario
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -49,6 +50,7 @@ class UsuarioController {
             }
         });
     }
+    //Método para insertar usuarios a la tabla tblUsuario
     insertar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -85,6 +87,7 @@ class UsuarioController {
             }
         });
     }
+    //Método para actualizar usuarios de la tabla tblUsuario
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -113,6 +116,7 @@ class UsuarioController {
             }
         });
     }
+    //Método para eliminar usuarios de la tabla tblUsuario
     eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

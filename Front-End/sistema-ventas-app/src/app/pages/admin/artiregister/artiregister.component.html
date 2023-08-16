@@ -1,31 +1,65 @@
-<mat-card class="small-card">
-    <div class="cuerpo">
+<!-- Contenedor principal -->
+<div class="bodymain">
+  <div class="row align-items-center">
+    <div class="col">
+      <!-- Título principal -->
+      <p class="h2">Productos</p>
 
-        <div class="centered-container">
-          <mat-card class="card">
-            <mat-card-content>
-                <h1>Registro de Nuevo Articulo</h1>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="width: 100%;">
-                  <input matInput type="text">
-                  <mat-label>Nombre</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="text">
-                  <mat-label>Descripción</mat-label>
-                </mat-form-field>
-              </div>
-              <div class="form-field">
-                <mat-form-field class="inputs" style="margin-right: 10px; width: 100%; ">
-                  <input matInput type="email">
-                  <mat-label>URL de la Imagen</mat-label>
-                </mat-form-field>
-              </div>
-              <button mat-button color="primary">Registrar Nuevo Articulo</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-</mat-card>
+      <!-- Botón para agregar un nuevo producto -->
+      <button type="button" class="btn btn-success" (click)="onOpenModal()">Añadir
+        Nuevo Producto</button>
+      <br>
+      <br>
+
+      <!-- Tabla para mostrar la lista de productos -->
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Fecha Registro</th>
+            <th scope="col">Responsable Registro</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Iteración a través de la lista de productos para mostrar cada fila de la tabla -->
+          <tr *ngFor="let producto of productos">
+            <!-- Datos de cada producto -->
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.nombreCategoria}}</td>
+            <td>{{ producto.fecha_Registro | date: 'dd/MM/yyyy' }}</td>
+            <td>{{producto.nombreUsuario}}</td>
+
+            <!-- Columna de acciones -->
+            <td>
+              <!-- Botón para añadir un detalle al producto -->
+              <button type="button" class="btn btn-warning"
+                (click)="onOpenModalDetalle(producto.idProducto)">
+                Añadir Detalle
+              </button>
+
+              <!-- Botón para ver los detalles completos del producto -->
+              <button type="button" class="btn btn-primary"
+                (click)="onGoToDetails(producto.idProducto)">
+                Ver Detalles del Producto
+              </button>
+
+              <!-- Botón para editar el producto -->
+              <button type="button" class="btn btn-info"
+                (click)="onOpenModal(producto)">
+                Editar
+              </button>
+
+              <!-- Botón para eliminar el producto -->
+              <button type="button" class="btn btn-danger"
+                (click)="onDelete(producto.idProducto)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

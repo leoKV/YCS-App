@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { ArtigeneralRoutingModule } from './artigeneral-routing.module';
 import { ArtigeneralComponent } from './artigeneral.component';
-
+import { MaterialModule } from '../../../material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ArtigeneralComponent
+    ArtigeneralComponent,
   ],
   imports: [
     CommonModule,
-    ArtigeneralRoutingModule
+    ArtigeneralRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class ArtigeneralModule { }

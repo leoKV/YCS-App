@@ -8,9 +8,9 @@ describe('ArtigeneralComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArtigeneralComponent ]
+      declarations: [ArtigeneralComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ArtigeneralComponent);
     component = fixture.componentInstance;

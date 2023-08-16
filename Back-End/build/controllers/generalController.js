@@ -26,5 +26,16 @@ class GeneralController {
             }
         });
     }
+    listarCategorias(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const categorias = yield generalDatabase_1.default.listarCategorias();
+                return res.json(categorias);
+            }
+            catch (error) {
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
 }
 exports.generalController = new GeneralController();
