@@ -16,7 +16,7 @@ const insertValidationRules = () => {
             .isLength({ min: 10, max: 50 }).withMessage("Rango Incorrecto")
             .isEmail().withMessage("Formato Incorrecto"),
         (0, express_validator_1.body)("telefono").trim().not().isEmpty().withMessage("Campo requerido"),
-        //     body("roles").isArray({min:1}).withMessage("Formato Incorrecto")
+        (0, express_validator_1.body)("roles").isArray({ min: 1 }).withMessage("Formato Incorrecto")
     ];
 };
 exports.insertValidationRules = insertValidationRules;
