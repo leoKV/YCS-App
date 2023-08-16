@@ -22,6 +22,7 @@ class GeneralController {
                 return res.json(roles);
             }
             catch (error) {
+                console.log(error);
                 return res.status(500).json({ mensaje: "Ocurrió un error" });
             }
         });

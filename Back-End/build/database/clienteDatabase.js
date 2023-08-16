@@ -13,25 +13,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../connections/database"));
-class GeneralDatabase {
-    listarRoles() {
+/**
+ * @name ClienteDatabase
+ * @author Manuel Matehuala
+ * @creation  18-07-2023
+ */
+class ClienteDatabase {
+    verificarEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query(" SELECT idRol, nombre, clave"
-                    + " FROM tblRol WHERE estatus=? ", [true]);
+                return yield connection.query(" SELECT idUsuario FROM tblUsuario WHERE email = ? ", [email]);
             }));
             return result;
         });
     }
-    listarCategorias() {
+    insertar(cliente) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query(" SELECT idCategoria, nombre, descripcion"
-                    + " FROM tblcategoria ");
+                return yield connection.query(" INSERT INTO tblUsuario SET ? ", [cliente]);
+            }));
+            return result;
+        });
+    }
+    insertarRol(rol) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" INSERT INTO tblUsuarioRol SET ? ", [rol]);
             }));
             return result;
         });
     }
 }
-const dao = new GeneralDatabase();
+const dao = new ClienteDatabase();
 exports.default = dao;

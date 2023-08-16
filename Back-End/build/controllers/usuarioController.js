@@ -94,18 +94,19 @@ class UsuarioController {
                 var _a = req.body, { roles, idUsuario } = _a, usuario = __rest(_a, ["roles", "idUsuario"]);
                 // actualizar la información de los roles
                 const resultRoles = yield usuarioDatabase_1.default.eliminarRolByIdUsuario(idUsuario);
-                if (resultRoles.affectedRows > 0) {
-                    for (let rol of roles) {
-                        rol.idUsuario = idUsuario;
-                        yield usuarioDatabase_1.default.insertarRol(rol);
-                    }
-                    const result = yield usuarioDatabase_1.default.actualizar(usuario, idUsuario);
-                    if (result.affectedRows > 0) {
-                        return res.json({ mensaje: "Usuario actualizado correctamente" });
-                    }
-                    else {
-                        return res.status(500).json({ mensaje: "ocurrió un error" });
-                    }
+                for (let rol of roles) {
+                    var rolUsuario = {
+                        idRol: rol.idRol,
+                        idUsuario
+                    };
+                    yield usuarioDatabase_1.default.insertarRol(rolUsuario);
+                }
+                const result = yield usuarioDatabase_1.default.actualizar(usuario, idUsuario);
+                if (result.affectedRows > 0) {
+                    return res.json({ mensaje: "Usuario actualizado correctamente" });
+                }
+                else {
+                    return res.status(500).json({ mensaje: "ocurrió un error" });
                 }
                 return res.json(idUsuario);
             }

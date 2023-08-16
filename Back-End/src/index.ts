@@ -5,6 +5,7 @@ import indexRoutes from "./routes/indexRoutes";
 import authRoutes from "./routes/authRoutes";
 import usuarioRoutes from "./routes/usuarioRoutes";
 import generalRoutes from "./routes/generalRoutes";
+import clienteRoutes from "./routes/clienteRoutes";
 import productoRoutes from "./routes/productoRoutes";
 import fileUpload from "express-fileupload";
 
@@ -61,6 +62,7 @@ class Server{
         this.app.use("/",indexRoutes);
         this.app.use("/api/auth",authRoutes);
         this.app.use("/api/usuario",usuarioRoutes);
+        this.app.use("/api/cliente",clienteRoutes);
         this.app.use("/api/general",generalRoutes);
         this.app.use("/api/producto",productoRoutes)
     }

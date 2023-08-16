@@ -18,7 +18,7 @@ class UsuarioDatabase {
     listar(idUsuario) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query(" SELECT idUsuario, nombre, apellidoPaterno,apellidoMaterno,email,fecha_Registro "
+                return yield connection.query(" SELECT idUsuario, nombre, apellidoPaterno,apellidoMaterno,email,telefono,fecha_Registro "
                     + " FROM tblUsuario WHERE idUsuario !=? ", [idUsuario]);
             }));
             return result;

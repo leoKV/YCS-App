@@ -11,3 +11,11 @@
     text-align: left;
     width: 50%;
 }
+
+.my-snackbar .mat-snack-bar-action {
+  display: none;
+}
+
+.validation-alert .mat-snack-bar-action {
+  display: none;
+}

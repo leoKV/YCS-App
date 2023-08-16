@@ -77,18 +77,20 @@ class UsuarioController{
             // actualizar la información de los roles
             const resultRoles = await dao.eliminarRolByIdUsuario(idUsuario);
 
-            if (resultRoles.affectedRows > 0) {
-                for (let rol of roles) {
-                    rol.idUsuario = idUsuario;
-                    await dao.insertarRol(rol);
-                }
+            for (let rol of roles) {
 
-                const result = await dao.actualizar(usuario, idUsuario);
-                if (result.affectedRows > 0) {
-                    return res.json({ mensaje: "Usuario actualizado correctamente" })
-                } else {
-                    return res.status(500).json({ mensaje: "ocurrió un error" })
+                var rolUsuario = {
+                    idRol: rol.idRol,
+                    idUsuario
                 }
+                await dao.insertarRol(rolUsuario);
+            }
+
+            const result = await dao.actualizar(usuario, idUsuario);
+            if (result.affectedRows > 0) {
+                return res.json({ mensaje: "Usuario actualizado correctamente" })
+            } else {
+                return res.status(500).json({ mensaje: "ocurrió un error" })
             }
 
 
