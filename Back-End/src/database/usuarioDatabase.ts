@@ -14,7 +14,7 @@ class UsuarioDatabase{
 
         return result;
     }
-
+    
     public async listarRolByUserId(idUsuario: number){
         const result =await pool.then(async (connection)=>{
             return await connection.query(

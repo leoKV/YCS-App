@@ -27,11 +27,12 @@ exports.usuarioController = void 0;
 const usuarioDatabase_1 = __importDefault(require("../database/usuarioDatabase"));
 const utils_1 = require("../utils/utils");
 /**
- * @name
- * @author
- * @creation
+ * @name usuarioController
+ * @author Kevin Leonel Valdez Sánchez
+ * @creation 10-07-2023
  */
 class UsuarioController {
+    //Método para listar todos los usuarios de la tabal tblUsuario
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -49,6 +50,7 @@ class UsuarioController {
             }
         });
     }
+    //Método para insertar usuarios a la tabla tblUsuario
     insertar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -85,24 +87,26 @@ class UsuarioController {
             }
         });
     }
+    //Método para actualizar usuarios de la tabla tblUsuario
     actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 var _a = req.body, { roles, idUsuario } = _a, usuario = __rest(_a, ["roles", "idUsuario"]);
                 // actualizar la información de los roles
                 const resultRoles = yield usuarioDatabase_1.default.eliminarRolByIdUsuario(idUsuario);
-                if (resultRoles.affectedRows > 0) {
-                    for (let rol of roles) {
-                        rol.idUsuario = idUsuario;
-                        yield usuarioDatabase_1.default.insertarRol(rol);
-                    }
-                    const result = yield usuarioDatabase_1.default.actualizar(usuario, idUsuario);
-                    if (result.affectedRows > 0) {
-                        return res.json({ mensaje: "Usuario actualizado correctamente" });
-                    }
-                    else {
-                        return res.status(500).json({ mensaje: "ocurrió un error" });
-                    }
+                for (let rol of roles) {
+                    var rolUsuario = {
+                        idRol: rol.idRol,
+                        idUsuario
+                    };
+                    yield usuarioDatabase_1.default.insertarRol(rolUsuario);
+                }
+                const result = yield usuarioDatabase_1.default.actualizar(usuario, idUsuario);
+                if (result.affectedRows > 0) {
+                    return res.json({ mensaje: "Usuario actualizado correctamente" });
+                }
+                else {
+                    return res.status(500).json({ mensaje: "ocurrió un error" });
                 }
                 return res.json(idUsuario);
             }
@@ -112,6 +116,7 @@ class UsuarioController {
             }
         });
     }
+    //Método para eliminar usuarios de la tabla tblUsuario
     eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

@@ -8,6 +8,8 @@ import generalRoutes from "./routes/generalRoutes";
 import clienteRoutes from "./routes/clienteRoutes";
 import categoriaRoutes from "./routes/categoriaRoutes";
 import session from 'express-session';
+import productoRoutes from "./routes/productoRoutes";
+import fileUpload from "express-fileupload";
 
 class Server {
 
@@ -37,6 +39,15 @@ class Server {
         // Realizar la configuración del puerto(host || local)
         this.app.set("port", 3000);
 
+        this.app.use(fileUpload({
+            createParentPath: true,
+            limits: {
+                fileSize: 2 * 1024 * 1024 * 1024 //Limit 2MB file 
+            }
+        }));
+
+        this.app.use(express.static('uploads'));
+
         // Mostrar las peticiones en la terminal (morgan)
         // process.env_NODE_ENV =1, production, 2.development
         var env = process.env.NODE_ENV || "development";
@@ -58,13 +69,14 @@ class Server {
      * @description Configuración inicial del sevidor
      * @returns void
      ***************************************************/
-    private routes(): void {
-        this.app.use("/", indexRoutes);
-        this.app.use("/api/auth", authRoutes);
-        this.app.use("/api/usuario", usuarioRoutes);
-        this.app.use("/api/cliente", clienteRoutes);
-        this.app.use("/api/general", generalRoutes);
+    private routes():void{
+        this.app.use("/",indexRoutes);
+        this.app.use("/api/auth",authRoutes);
+        this.app.use("/api/usuario",usuarioRoutes);
+        this.app.use("/api/cliente",clienteRoutes);
+        this.app.use("/api/general",generalRoutes);
         this.app.use("/api/categorias", categoriaRoutes);
+        this.app.use("/api/producto",productoRoutes)
     }
 
     /***************************************************

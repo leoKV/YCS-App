@@ -35,7 +35,8 @@ const routes: Routes = [
   { path: 'categorias/general', loadChildren: () => import('./pages/admin/categeneral/categeneral.module').then(m => m.CategeneralModule) },
   { path: 'articulos/register', loadChildren: () => import('./pages/admin/artiregister/artiregister.module').then(m => m.ArtiregisterModule) },
   { path: 'articulos/detail', loadChildren: () => import('./pages/admin/artidetails/artidetails.module').then(m => m.ArtidetailsModule) },
-  { path: 'articulos/general', loadChildren: () => import('./pages/admin/artigeneral/artigeneral.module').then(m => m.ArtigeneralModule) }
+  { path: 'articulos/general', loadChildren: () => import('./pages/admin/artigeneral/artigeneral.module').then(m => m.ArtigeneralModule) },
+  { path: 'articulos/view', loadChildren: () => import('./pages/home/components/artiview/artiview.module').then(m => m.ArtiviewModule) }
 ];
 
 @NgModule({

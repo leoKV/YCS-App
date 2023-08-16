@@ -25,7 +25,7 @@ export class BaseForm{
                     pattern:'Formato inválido',
                     min:'El rango no es correcto',
                     max:'El rango no es correcto',
-                    minlength:'Formato inválido',
+                    minlength:'La contraseña debe tener entre 8-15 caracteres',
                     notEquivalentContrasenia:'Las contraseñas no coinciden'
                 }
 

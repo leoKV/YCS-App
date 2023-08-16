@@ -11,6 +11,8 @@ import {MatInputModule } from '@angular/material/input'; // Agrega esta importac
 import{MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
+
 const myModules: any =[
     MatButtonModule,
     MatToolbarModule,
@@ -22,7 +24,7 @@ const myModules: any =[
     MatSelectModule,
     MatInputModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
 ];
 
  @NgModule({

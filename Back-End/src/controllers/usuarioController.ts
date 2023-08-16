@@ -3,11 +3,12 @@ import dao from "../database/usuarioDatabase";
 import { utils } from "../utils/utils";
 
 /**
- * @name
- * @author
- * @creation
+ * @name usuarioController
+ * @author Kevin Leonel Valdez Sánchez
+ * @creation 10-07-2023
  */
 class UsuarioController{
+    //Método para listar todos los usuarios de la tabal tblUsuario
     public async listar(req:Request, res:Response){
         try{
             const token = <string> req.headers["auth"];
@@ -26,6 +27,7 @@ class UsuarioController{
         }
     }
 
+    //Método para insertar usuarios a la tabla tblUsuario
     public async insertar(req: Request, res: Response) {
         try {
 
@@ -66,6 +68,8 @@ class UsuarioController{
         }
     }
 
+
+    //Método para actualizar usuarios de la tabla tblUsuario
     public async actualizar(req: Request, res: Response) {
         try {
             var { roles, idUsuario, ...usuario } = req.body;
@@ -73,18 +77,20 @@ class UsuarioController{
             // actualizar la información de los roles
             const resultRoles = await dao.eliminarRolByIdUsuario(idUsuario);
 
-            if (resultRoles.affectedRows > 0) {
-                for (let rol of roles) {
-                    rol.idUsuario = idUsuario;
-                    await dao.insertarRol(rol);
-                }
+            for (let rol of roles) {
 
-                const result = await dao.actualizar(usuario, idUsuario);
-                if (result.affectedRows > 0) {
-                    return res.json({ mensaje: "Usuario actualizado correctamente" })
-                } else {
-                    return res.status(500).json({ mensaje: "ocurrió un error" })
+                var rolUsuario = {
+                    idRol: rol.idRol,
+                    idUsuario
                 }
+                await dao.insertarRol(rolUsuario);
+            }
+
+            const result = await dao.actualizar(usuario, idUsuario);
+            if (result.affectedRows > 0) {
+                return res.json({ mensaje: "Usuario actualizado correctamente" })
+            } else {
+                return res.status(500).json({ mensaje: "ocurrió un error" })
             }
 
 
@@ -96,6 +102,7 @@ class UsuarioController{
         }
     }
 
+    //Método para eliminar usuarios de la tabla tblUsuario
     public async eliminar(req:Request, res:Response){
         try{
             var idUsuario: number = parseInt(req.params.idUsuario) ;

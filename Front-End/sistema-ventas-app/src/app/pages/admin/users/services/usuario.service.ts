@@ -19,6 +19,7 @@ export class UsuarioService {
     return this.http.get<UsuarioResponse[]>(`${environment.API_URL}/usuario`,{headers:{"requireToken":"true"}})
     .pipe(catchError((error)=>this.handlerError(error)));
   }
+  
   getRoles(){
     return this.http.get<any>(`${environment.API_URL}/general/roles`,{headers:{"requireToken":"true"}})
     .pipe(catchError((error)=>this.handlerError(error)));

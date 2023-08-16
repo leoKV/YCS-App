@@ -10,6 +10,7 @@ class GeneralRoutes {
     }
     config() {
         this.router.get("/roles", [jwtCheck_1.jwtCheck], generalController_1.generalController.listarRoles);
+        this.router.get("/categorias", [jwtCheck_1.jwtCheck], generalController_1.generalController.listarCategorias);
     }
 }
 const generalRoutes = new GeneralRoutes();
