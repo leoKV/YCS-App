@@ -14,7 +14,7 @@ class CategoriaRoutes {
         // Insertar
         this.router.post("/", (0, UsuarioValidatorRules_1.insertValidationRules)(), categoriaController_1.categoriaController.insertar);
         // Actualizar
-        this.router.put("/:idCategoria", (0, UsuarioValidatorRules_1.updateValidationRules)(), categoriaController_1.categoriaController.actualizar);
+        this.router.put("/:idCategoria", categoriaController_1.categoriaController.actualizar);
         // Eliminar
         this.router.delete("/:idCategoria", categoriaController_1.categoriaController.eliminar);
     }
