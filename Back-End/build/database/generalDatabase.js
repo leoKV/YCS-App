@@ -27,7 +27,7 @@ class GeneralDatabase {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
                 return yield connection.query(" SELECT idCategoria, nombre, descripcion"
-                    + " FROM tblcategoria ");
+                    + " FROM tblCategoria ");
             }));
             return result;
         });

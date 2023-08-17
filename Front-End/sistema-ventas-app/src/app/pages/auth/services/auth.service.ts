@@ -74,6 +74,7 @@ export class AuthService {
       .pipe(map((data:AuthResponse)=>{
         if(data.token){
           this.saveLocalStorage(data.token);
+          console.log('Token JWT almacenado en localStorage:', data.token); // Agregar esta línea
           // this.token.next(data.token);
           // this.isLogged.next(true);
           this.router.navigate(['/home']);

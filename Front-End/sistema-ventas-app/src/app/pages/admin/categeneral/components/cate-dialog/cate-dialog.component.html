@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<br>
+<mat-dialog-content class="formulario-vertical">
+  <form [formGroup]="cateForm" (submit)="onSave()">
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input type="text" formControlName="nombre" matInput>
+      <mat-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <input type="text" formControlName="descripcion" matInput>
+      <mat-error>
+      </mat-error>
+    </mat-form-field>
+    <div align="center">
+      <button class="me-2" type="submit" mat-raised-button color="primary">
+        <mat-icon>save</mat-icon>
+        {{ titleButton }}
+      </button>
+      <button mat-raised-button color="warn" (click)="onClear()">
+        <mat-icon>clear</mat-icon>
+        Limpiar
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    Cerrar
+  </button>
+</mat-dialog-actions>
