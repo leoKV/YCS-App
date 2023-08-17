@@ -12,9 +12,9 @@ class CategoriaRoutes {
         // Listar
         this.router.get("/", categoriaController_1.categoriaController.listar);
         // Insertar
-        this.router.post("/", categoriasValidatorRules_1.insertValidationRules, categoriaController_1.categoriaController.insertar);
+        this.router.post("/", (0, categoriasValidatorRules_1.insertValidationRules)(), categoriaController_1.categoriaController.insertar);
         // Actualizar
-        this.router.put("/:idCategoria", categoriasValidatorRules_1.updateValidationRules, categoriaController_1.categoriaController.actualizar);
+        this.router.put("/:idCategoria", (0, categoriasValidatorRules_1.updateValidationRules)(), categoriaController_1.categoriaController.actualizar);
         // Eliminar
         this.router.delete("/:idCategoria", categoriaController_1.categoriaController.eliminar);
     }
