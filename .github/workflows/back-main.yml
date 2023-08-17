@@ -33,7 +33,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         if: github.event.ref == 'refs/heads/main'
         with:
-          server: ${{ 146.190.112.187 }}
+          server: 146.190.112.187
           username: ${{ secrets.USERNAME_API }}
           password: ${{ secrets.PASSWORD_API }}
           protocol: ftps
