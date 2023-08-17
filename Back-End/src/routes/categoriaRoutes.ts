@@ -2,7 +2,7 @@ import { Router } from "express";
 import { categoriaController } from "../controllers/categoriaController";
 import { jwtCheck } from "../middlewares/jwtCheck";
 import { validate } from "../middlewares/validatorCheck"; 
-import { insertValidationRules, } from "../validators/categoriasValidatorRules";
+import { insertValidationRules, updateValidationRules} from "../validators/categoriasValidatorRules";
 
 class CategoriaRoutes {
   public router: Router;
@@ -16,9 +16,9 @@ class CategoriaRoutes {
     // Listar
     this.router.get("/", categoriaController.listar);
     // Insertar
-    this.router.post("/", categoriaController.insertar);
+    this.router.post("/", insertValidationRules, categoriaController.insertar);
     // Actualizar
-    this.router.put("/:idCategoria", categoriaController.actualizar);
+    this.router.put("/:idCategoria", updateValidationRules, categoriaController.actualizar);
     // Eliminar
     this.router.delete("/:idCategoria", categoriaController.eliminar);
   }
