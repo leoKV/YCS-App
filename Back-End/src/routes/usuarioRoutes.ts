@@ -18,7 +18,7 @@ class UsuarioRoutes{
         //Insertar
         this.router.post("/",[ jwtCheck,validate ],usuarioController.insertar);
         //Actualizar
-        this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
+        this.router.put("/",[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
         this.router.delete("/:idUsuario",usuarioController.eliminar);
     }
