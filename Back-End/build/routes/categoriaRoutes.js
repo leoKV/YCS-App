@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const categoriaController_1 = require("../controllers/categoriaController");
-// import { insertValidationRules, } from "../validators/UsuarioValidatorRules";
 class CategoriaRoutes {
     constructor() {
         this.router = (0, express_1.Router)();

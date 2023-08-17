@@ -2,7 +2,6 @@ import { Router } from "express";
 import { categoriaController } from "../controllers/categoriaController";
 import { jwtCheck } from "../middlewares/jwtCheck";
 import { validate } from "../middlewares/validatorCheck";
-// import { insertValidationRules, } from "../validators/UsuarioValidatorRules";
 
 class CategoriaRoutes {
   public router: Router;

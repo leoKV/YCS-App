@@ -1,5 +1,4 @@
 import { Router } from "express";
-// import { insertClientValidationRules } from "../validators/UsuarioValidatorRules";
 import { validate } from "../middlewares/validatorCheck";
 import { clienteController } from "../controllers/clienteController";
 
