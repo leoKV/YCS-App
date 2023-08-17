@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const UsuarioValidatorRules_1 = require("../validators/UsuarioValidatorRules");
 const validatorCheck_1 = require("../middlewares/validatorCheck");
 const clienteController_1 = require("../controllers/clienteController");
 /**
@@ -15,7 +16,7 @@ class ClienteRoutes {
     }
     config() {
         //Insertar
-        this.router.post("/", [validatorCheck_1.validate], clienteController_1.clienteController.insertar);
+        this.router.post("/", (0, UsuarioValidatorRules_1.insertClientValidationRules)(), [validatorCheck_1.validate], clienteController_1.clienteController.insertar);
     }
 }
 const cliente = new ClienteRoutes();
