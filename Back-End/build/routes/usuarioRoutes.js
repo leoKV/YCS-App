@@ -17,7 +17,7 @@ class UsuarioRoutes {
         //Insertar
         this.router.post("/", (0, testValidationRule_1.insertUserValidator)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], usuarioController_1.usuarioController.insertar);
         //Actualizar
-        this.router.put("/", [jwtCheck_1.jwtCheck], usuarioController_1.usuarioController.actualizar);
+        this.router.put("/", (0, testValidationRule_1.updateValidationRules)(), [jwtCheck_1.jwtCheck, validatorCheck_1.validate], usuarioController_1.usuarioController.actualizar);
         //Eliminar
         this.router.delete("/:idUsuario", usuarioController_1.usuarioController.eliminar);
     }
