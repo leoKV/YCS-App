@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const categoriaController_1 = require("../controllers/categoriaController");
-const UsuarioValidatorRules_1 = require("../validators/UsuarioValidatorRules");
+// import { insertValidationRules, } from "../validators/UsuarioValidatorRules";
 class CategoriaRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
@@ -12,7 +12,7 @@ class CategoriaRoutes {
         // Listar
         this.router.get("/", categoriaController_1.categoriaController.listar);
         // Insertar
-        this.router.post("/", (0, UsuarioValidatorRules_1.insertValidationRules)(), categoriaController_1.categoriaController.insertar);
+        this.router.post("/", categoriaController_1.categoriaController.insertar);
         // Actualizar
         this.router.put("/:idCategoria", categoriaController_1.categoriaController.actualizar);
         // Eliminar
