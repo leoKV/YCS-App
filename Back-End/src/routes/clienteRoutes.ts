@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { validate } from "../middlewares/validatorCheck";
 import { clienteController } from "../controllers/clienteController";
+import { insertClientValidationRules } from '../validators/testValidationRule';
 
 /**
  * @name ClienteRoutes
@@ -17,7 +18,7 @@ class ClienteRoutes {
 
     private config() {
         //Insertar
-        this.router.post("/",  [validate], clienteController.insertar);
+        this.router.post("/", insertClientValidationRules, [validate], clienteController.insertar);
     }
 }
 const cliente = new ClienteRoutes();
