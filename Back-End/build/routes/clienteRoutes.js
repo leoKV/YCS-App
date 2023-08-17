@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-// import { insertClientValidationRules } from "../validators/UsuarioValidatorRules";
 const validatorCheck_1 = require("../middlewares/validatorCheck");
 const clienteController_1 = require("../controllers/clienteController");
 /**
