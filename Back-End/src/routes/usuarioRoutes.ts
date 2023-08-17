@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { usuarioController } from "../controllers/usuarioController";
-import { insertValidationRules, updateValidationRules } from "../validators/UsuarioValidatorRules";
+import { insertValidationRules } from "../validators/UsuarioValidatorRules";
 import { validate } from "../middlewares/validatorCheck";
 import { jwtCheck } from "../middlewares/jwtCheck";
 
@@ -14,11 +14,11 @@ class UsuarioRoutes{
 
     private config(){
         //Listar
-        this.router.get("/",[ jwtCheck ],usuarioController.listar);
+        this.router.get("/", [ jwtCheck ],usuarioController.listar);
         //Insertar
-        this.router.post("/",insertValidationRules(),[ jwtCheck,validate ],usuarioController.insertar);
+        this.router.post("/", insertValidationRules(), [ jwtCheck, validate ],usuarioController.insertar);
         //Actualizar
-        this.router.put("/",updateValidationRules(),[ jwtCheck,validate ],usuarioController.actualizar);
+        this.router.put("/",[ jwtCheck,validate ],usuarioController.actualizar);
         //Eliminar
         this.router.delete("/:idUsuario",usuarioController.eliminar);
     }
