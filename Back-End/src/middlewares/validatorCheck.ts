@@ -4,7 +4,6 @@ import {validationResult} from 'express-validator';
 export const validate = (req:Request,res:Response, next:NextFunction) =>{
     //Se obtienen los errores a partir del request original de la petición
     const errors = validationResult(req);
-    console.log(errors);
 
     //Si no existen errores la petición continua
     if(errors.isEmpty()) return next();

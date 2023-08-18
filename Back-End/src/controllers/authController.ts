@@ -32,6 +32,7 @@ class AuthController{
                 const {contrasenia, fecha_Registro,... newUser} = user;
                 // Generar un JWT (JsonWebToken)
                 var token = utils.generateJWT(newUser);
+                console.log("Token generado:", token);
                 //Devolver la información
                 return res.json({token, mensaje:"Autentificación correcta"});
                 }

@@ -5,7 +5,7 @@ class GeneralDatabase{
         const result = await pool.then(async(connection)=>{
             return await connection.query(
                 " SELECT idRol, nombre, clave"
-                +" FROM tblrol WHERE estatus=? ",
+                +" FROM tblRol WHERE estatus=? ",
                 [true]
             );
 
@@ -17,7 +17,7 @@ class GeneralDatabase{
         const result = await pool.then(async(connection)=>{
             return await connection.query(
                 " SELECT idCategoria, nombre, descripcion"
-                +" FROM tblcategoria "
+                +" FROM tblCategoria "
             );
 
         });

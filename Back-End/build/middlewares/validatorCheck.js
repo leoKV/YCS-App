@@ -5,7 +5,6 @@ const express_validator_1 = require("express-validator");
 const validate = (req, res, next) => {
     //Se obtienen los errores a partir del request original de la petición
     const errors = (0, express_validator_1.validationResult)(req);
-    console.log(errors);
     //Si no existen errores la petición continua
     if (errors.isEmpty())
         return next();

@@ -33,6 +33,9 @@ const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const generalRoutes_1 = __importDefault(require("./routes/generalRoutes"));
+const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
+const categoriaRoutes_1 = __importDefault(require("./routes/categoriaRoutes"));
+const express_session_1 = __importDefault(require("express-session"));
 const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const path = __importStar(require("path"));
@@ -50,6 +53,12 @@ class Server {
      * @returns void
      ***************************************************/
     config() {
+        // Configuración del middleware de sesión
+        this.app.use((0, express_session_1.default)({
+            secret: 'mysecret',
+            resave: false,
+            saveUninitialized: true,
+        }));
         // Realizar la configuración del puerto(host || local)
         this.app.set("port", 3000);
         this.app.use((0, express_fileupload_1.default)({
@@ -81,7 +90,9 @@ class Server {
         this.app.use("/", indexRoutes_1.default);
         this.app.use("/api/auth", authRoutes_1.default);
         this.app.use("/api/usuario", usuarioRoutes_1.default);
+        this.app.use("/api/cliente", clienteRoutes_1.default);
         this.app.use("/api/general", generalRoutes_1.default);
+        this.app.use("/api/categorias", categoriaRoutes_1.default);
         this.app.use("/api/producto", productoRoutes_1.default);
     }
     /***************************************************

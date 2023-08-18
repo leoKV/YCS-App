@@ -23,17 +23,17 @@
 
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
-                            <td>{{ usuario.nombre + usuario.apellidoPaterno + usuario.apellidoMaterno }}</td>
+                            <td>{{ usuario.nombre + ' ' + usuario.apellidoPaterno + ' ' + usuario.apellidoMaterno }}</td>
                             <td>{{ usuario.email}} </td>
                             <td>{{ usuario.fecha_Registro|date:'dd/MM/yyyy'}}</td>
                             <td>
-                                <button mat-raised-button color="accent">
+                                <button mat-raised-button color="accent" (click)="onOpenModal(usuario)">
                                     <mat-icon>edit</mat-icon>
                                     Editar
                                 </button>
                             </td>
                             <td>
-                                <button mat-raised-button color="warn">
+                                <button mat-raised-button color="warn" (click)="onDelete(usuario.idUsuario)">
                                     <mat-icon>delete</mat-icon>
                                     Eliminar
                                 </button>

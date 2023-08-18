@@ -30,7 +30,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 /**
  * @name Utils
  * @author Kevin Leonel Valdez Sánchez
- * @creation 27/96/2023
+ * @creation 27/06/2023
  */
 class Utils {
     /**
