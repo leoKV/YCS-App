@@ -7,6 +7,8 @@ import usuarioRoutes from "./routes/usuarioRoutes";
 import generalRoutes from "./routes/generalRoutes";
 import productoRoutes from "./routes/productoRoutes";
 import fileUpload from "express-fileupload";
+import * as path from 'path';
+import constants from "./config/constants";
 
 class Server{
 
@@ -34,7 +36,9 @@ class Server{
             }
         }));
 
-        this.app.use(express.static('uploads'));
+        var assetsPath = path.join(__dirname, '../uploads');
+
+        this.app.use(constants.CONSTANTS.UPLOADS_PATH_ENDPOINT, express.static(assetsPath));
 
         // Mostrar las peticiones en la terminal (morgan)
         // process.env_NODE_ENV =1, production, 2.development

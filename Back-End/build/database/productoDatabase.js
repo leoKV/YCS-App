@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../connections/database"));
+const constants_1 = __importDefault(require("../config/constants"));
 class ProductoDatabase {
     //Métodos para listar
     //Método para listar productos con el nombre de la categoría y el nombre del usuario
@@ -33,12 +34,15 @@ class ProductoDatabase {
     listarByProductId(idProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                const imgPrefix = `${constants_1.default.CONSTANTS.UPLOADS_PATH_ENDPOINT}/${idProducto}/`;
                 return yield connection.query(`
             SELECT p.*, c.nombre AS nombreCategoria,
-            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario
+            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario, CONCAT("${imgPrefix}", ip.rutaImagen) AS RutaImagen
             FROM tblProducto p
             INNER JOIN tblCategoria c ON p.idCategoria = c.idCategoria
             INNER JOIN tblUsuario u ON p.idRegistro = u.idUsuario
+            INNER JOIN tblDetalleProducto dp ON dp.idProducto = p.idProducto
+            INNER JOIN tblImagenProducto ip ON ip.idDetalleProducto = dp.idDetalleProducto
         `, [idProducto]);
             }));
             return result;
@@ -63,7 +67,9 @@ class ProductoDatabase {
     listarImagenByProductDetailId(idDetalleProducto) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query(" SELECT * FROM tblImagenProducto WHERE idDetalleProducto =? ", [idDetalleProducto]);
+                const imgPrefix = constants_1.default.CONSTANTS.UPLOADS_PATH_ENDPOINT;
+                return yield connection
+                    .query(`SELECT img.idImagen, CONCAT("${imgPrefix}",ip.idProducto,"/", img.rutaImagen) as rutaImagen, img.idDetalleProducto FROM tblImagenProducto as img INNER JOIN tblDetalleProducto ip ON img.idDetalleProducto = ip.idDetalleProducto WHERE ip.idDetalleProducto =?`, [idDetalleProducto]);
             }));
             return result;
         });

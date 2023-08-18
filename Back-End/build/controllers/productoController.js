@@ -60,6 +60,9 @@ class ProductoController {
             try {
                 var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
                 var detalleProducto = yield productoDatabase_1.default.listarDetalleByProductId(idProducto);
+                for (let producto of detalleProducto) {
+                    producto.imagenes = yield productoDatabase_1.default.listarImagenByProductDetailId(producto.idDetalleProducto);
+                }
                 return res.json(detalleProducto);
             }
             catch (error) {
