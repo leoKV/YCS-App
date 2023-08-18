@@ -5,6 +5,7 @@ import { ProductoResponse } from '../../shared/models/producto.interface';
 import { ProductoDetalleResponse } from '../../shared/models/producto.detalle.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
+import { Imagen } from '../../shared/models/imagen.interface';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Arreglos para almacenar productos, categorías y detalles de producto
   productos: ProductoResponse[] = [];
   detalles: ProductoDetalleResponse[] = [];
+  imagenes: Imagen[]=[];
 
   constructor(
     private productoSvc: ProductoService,
@@ -62,6 +64,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   obtenerDetalles(idProducto: number): ProductoDetalleResponse[] {
     return this.detalles.filter(detalle => detalle.idProducto === idProducto);
+  }
+  
+  obtenerImagen(idDetalle: number): Imagen[] {
+    return this.imagenes.filter(detalle => detalle.idDetalleProducto === idDetalle);
   }
   
     // Método para navegar a la vista de detalles de producto

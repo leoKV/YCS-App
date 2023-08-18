@@ -5,6 +5,8 @@ import { ProductoDetalleService } from '../../../admin/artidetails/services/prod
 import { ProductoDetalleResponse } from '../../../../shared/models/producto.detalle.interface';
 import { ProductoResponse } from '../../../../shared/models/producto.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { Imagen } from '../../../../shared/models/imagen.interface';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-artiview',
@@ -20,6 +22,7 @@ export class ArtiviewComponent implements OnInit, OnDestroy {
   detalles: ProductoDetalleResponse[] = [];
   idProductoFromUrl: number = -1;
   detallesPorProducto: { [productId: number]: ProductoDetalleResponse } = {};
+  readonly API_DOMAIN = environment.API_DOMAIN;
 
   constructor(
     private productoSvc: ProductoService,
@@ -50,6 +53,7 @@ export class ArtiviewComponent implements OnInit, OnDestroy {
   // Método para obtener la lista de productos
   private listar(idProducto: number) {
     this.productoSvc.getProducto(idProducto).pipe(takeUntil(this.destroy$)).subscribe((productos) => {
+      console.log(productos);
       this.productos = productos;
     });
   }

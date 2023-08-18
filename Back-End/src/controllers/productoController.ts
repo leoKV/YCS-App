@@ -33,6 +33,9 @@ class ProductoController {
             var idProducto = parseInt(req.params.idProducto); // Convertir el idProducto de string a number
 
             var detalleProducto = await daoP.listarDetalleByProductId(idProducto);
+            for (let producto of detalleProducto) {
+                producto.imagenes = await daoP.listarImagenByProductDetailId(producto.idDetalleProducto);
+            }
             return res.json(detalleProducto);
         } catch (error) {
             console.error(error);

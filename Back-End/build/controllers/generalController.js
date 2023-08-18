@@ -37,5 +37,16 @@ class GeneralController {
             }
         });
     }
+    getProductos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const productos = yield generalDatabase_1.default.getProductos();
+                return res.json(productos);
+            }
+            catch (error) {
+                return res.status(500).json({ mensaje: "Ocurrió un error" });
+            }
+        });
+    }
 }
 exports.generalController = new GeneralController();

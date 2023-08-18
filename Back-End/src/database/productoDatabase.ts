@@ -1,5 +1,6 @@
 import connection from "../config/connection";
 import pool from "../connections/database";
+import constants from "../config/constants";
 
 class ProductoDatabase {
     //Métodos para listar
@@ -20,15 +21,18 @@ class ProductoDatabase {
 
     public async listarByProductId(idProducto: number) {
         const result = await pool.then(async (connection) => {
+            const imgPrefix = `${constants.CONSTANTS.UPLOADS_PATH_ENDPOINT}/${idProducto}/`;
             return await connection.query(`
             SELECT p.*, c.nombre AS nombreCategoria,
-            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario
+            CONCAT(u.nombre, ' ', u.apellidoPaterno, ' ', u.apellidoMaterno) AS nombreUsuario, CONCAT("${imgPrefix}", ip.rutaImagen) AS RutaImagen
             FROM tblProducto p
             INNER JOIN tblCategoria c ON p.idCategoria = c.idCategoria
             INNER JOIN tblUsuario u ON p.idRegistro = u.idUsuario
+            INNER JOIN tblDetalleProducto dp ON dp.idProducto = p.idProducto
+            INNER JOIN tblImagenProducto ip ON ip.idDetalleProducto = dp.idDetalleProducto
         `, [idProducto]);
         });
-        return result;
+        return result;  
     }
 
     public async listarDetalleByProductId(idProducto: number) {
@@ -47,7 +51,10 @@ class ProductoDatabase {
 
     public async listarImagenByProductDetailId(idDetalleProducto: number) {
         const result = await pool.then(async (connection) => {
-            return await connection.query(" SELECT * FROM tblImagenProducto WHERE idDetalleProducto =? ", [idDetalleProducto]);
+            const imgPrefix = constants.CONSTANTS.UPLOADS_PATH_ENDPOINT;
+            return await connection
+                            .query(`SELECT img.idImagen, CONCAT("${imgPrefix}",ip.idProducto,"/", img.rutaImagen) as rutaImagen, img.idDetalleProducto FROM tblImagenProducto as img INNER JOIN tblDetalleProducto ip ON img.idDetalleProducto = ip.idDetalleProducto WHERE ip.idDetalleProducto =?`,
+                                    [idDetalleProducto]);
         });
         return result;
     }

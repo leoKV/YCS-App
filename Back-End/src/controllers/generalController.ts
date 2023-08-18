@@ -24,5 +24,16 @@ class GeneralController {
             return res.status(500).json({ mensaje: "Ocurrió un error" });
         }
     }
+
+    public async getProductos(req: Request, res: Response) {
+        try {
+            const productos = await dao.getProductos();
+
+            return res.json(productos);
+
+        } catch (error) {
+            return res.status(500).json({ mensaje: "Ocurrió un error" });
+        }
+    }
 }
 export const generalController = new GeneralController();

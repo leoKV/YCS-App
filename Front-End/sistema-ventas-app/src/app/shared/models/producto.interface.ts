@@ -1,3 +1,8 @@
+import { Imagen } from "./imagen.interface";
+import { ProductoDetalleResponse } from "./producto.detalle.interface";
+
+
+
 export interface ProductoResponse {
     idProducto: number;
     nombre: string;
@@ -7,4 +12,7 @@ export interface ProductoResponse {
     fecha_Registro?: Date;
     nombreCategoria: string;
     nombreUsuario: string;
+    detalles?: ProductoDetalleResponse[];
+    imagenes?: Imagen[];
+    RutaImagen?: string;
 }
