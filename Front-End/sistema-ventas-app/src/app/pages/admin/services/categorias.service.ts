@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 export class CategoriasService {
   // Propiedad para indicar que se necesita el token de autorización
   private httpOptions = { headers: new HttpHeaders({ 'requireToken': 'true' }) };
-  private apiUrl = 'http://localhost:3000/api'; 
+  private apiUrl = 'http://146.190.112.187:3000/api'; 
 
   constructor(private http: HttpClient) { }
 
